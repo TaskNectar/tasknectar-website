@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Create Professional Quotes Instantly | Free Quote Estimator Tool by TaskNectar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Include html2pdf v0.9.3 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.x.x/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+<!--MY SCRIPTS-->
+<!-- SEO Meta Tags -->
+  <meta name="description" content="Generate professional quotes quickly and easily. Enter your details, preview your quote, and download a PDF — all for free, with no sign-up required.">
+<meta name="keywords" content="free quote generator, quote estimator, professional quotes, download quote PDF, online quote tool, no sign-up quote tool">
+  <meta name="author" content="TaskNectar">
+  <link rel="canonical" href="https://www.tasknectar.com/quote-estimator" />
+
+  <!-- Open Graph (OG) Meta Tags -->
+  <meta property="og:title" content="Free Invoice Generator | TaskNectar">
+  <meta property="og:description" content="Create invoices quickly with TaskNectar’s free invoice generator. Customise, preview and download invoices as PDFs with no sign-up.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.tasknectar.com/invoice-generator">
+  <meta property="og:image" content="https://www.tasknectar.com/assets/invoice-generator-preview.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Invoice Generator | TaskNectar">
+  <meta name="twitter:description" content="Create and download custom invoices for free online. No login needed. Great for freelancers and small businesses.">
+  <meta name="twitter:image" content="https://www.tasknectar.com/assets/invoice-generator-preview.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/TaskNectar/img/TaskNectar Favicon.png">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+<!--END MY SCRIPT-->
+  
+   <style>
+    body {
+      background-color: #f4f6fb;
+      font-family: 'Montserrat', sans-serif;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    #quoteEstimator {
+      background: #fff;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      max-width: 1000px;
+      margin: 50px auto;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      color: #1e1e1e;
+    }
+
+    form label {
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: inline-block;
+    }
+
+    .form-control, .form-select {
+      border-radius: 12px;
+      padding: 10px 14px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: #EFB301;
+      box-shadow: 0 0 0 3px rgba(239, 179, 1, 0.2);
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+
+    .flex-row > * {
+      flex: 1;
+      min-width: 240px;
+    }
+
+    button {
+      border-radius: 999px !important;
+      padding: 10px 22px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    #addItemBtn {
+      background-color: transparent;
+      border: 2px solid #EFB301;
+      color: #EFB301;
+    }
+
+    #addItemBtn:hover {
+      background-color: #EFB301;
+      color: white;
+    }
+
+    #generatePreviewBtn {
+      background-color: #EFB301;
+      border: none;
+      color: white;
+    }
+
+    #generatePreviewBtn:hover {
+      background-color: #cc9900;
+    }
+
+    #downloadPdfBtn {
+      background-color: #28a745;
+      border: none;
+      color: white;
+    }
+
+    #downloadPdfBtn:hover {
+      background-color: #218838;
+    }
+
+    table.table {
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 15px;
+    }
+
+    table th {
+      background-color: #f1f1f1;
+      font-weight: 600;
+    }
+
+    table th, table td {
+      vertical-align: middle;
+      padding: 10px;
+      border: 1px solid #dee2e6;
+    }
+
+    #pdfPreviewContainer {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+      margin-top: 30px;
+    }
+
+    input[type="file"]::file-selector-button {
+      background: #EFB301;
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    /* Responsive tweaks */
+@media (max-width: 768px) {
+  /* Make items table horizontally scrollable */
+  table.table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Shrink table cell padding on mobile */
+  table th, table td {
+    padding: 6px 8px;
+    font-size: 14px;
+  }
+
+  /* Make inputs full width on mobile */
+  .flex-row {
+    flex-direction: column;
+  }
+  .flex-row > * {
+    min-width: 100% !important;
+  }
+
+  /* Reduce padding on form controls */
+  .form-control, .form-select {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  /* Preview container width and padding */
+  #pdfPreviewContainer {
+    padding: 20px;
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+
+  /* Buttons full width with margin */
+  #addItemBtn, #generatePreviewBtn, #downloadPdfBtn {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  .copyright {
+    margin-bottom: 7% !important;
+}
+}
+
+  </style>
+</head>
+<body>
+  <div data-include="header.html"></div>
+  <section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Create Professional Quotes Instantly </h1>
+    <p>Enter your details, preview your quote instantly, and download it as a PDF. No sign-up needed, no fuss.</p>
+    <p><i>For best results, use on desktop</i></p>
+  </div>
+</section>
+
+  <div id="quoteEstimator" class="container">
+    <h1 class="text-center my-4">Quote / Estimator</h1>
+    <form id="quoteForm">
+      <!-- Company Info -->
+      <div class="mb-3">
+        <label for="companyName" class="form-label">Your Company Name</label>
+        <input type="text" id="companyName" class="form-control" placeholder="Your Company Name" required>
+      </div>
+      <div class="flex-row mb-3">
+        <div>
+          <label for="companyEmail" class="form-label">Your Company Email</label>
+          <input type="email" id="companyEmail" class="form-control" placeholder="you@example.com" required>
+        </div>
+        <div>
+          <label for="companyPhone" class="form-label">Your Company Phone Number</label>
+          <input type="text" id="companyPhone" class="form-control" placeholder="+44 1234 567890">
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="companyLogo" class="form-label">Upload Logo</label>
+        <input type="file" id="companyLogo" class="form-control" accept="image/*">
+      </div>
+      <div class="mb-3">
+        <label for="notes" class="form-label">Notes</label>
+        <textarea id="notes" class="form-control" rows="2" placeholder="Payment terms, delivery notes, etc."></textarea>
+      </div>
+      <!-- Quote Details -->
+      <div class="flex-row mb-3">
+        <div>
+          <label for="quoteNumber" class="form-label">Quote #</label>
+          <input type="text" id="quoteNumber" class="form-control" placeholder="e.g. Q-2025-001">
+        </div>
+        <div>
+          <label for="quoteDate" class="form-label">Quote Date</label>
+          <input type="date" id="quoteDate" class="form-control">
+        </div>
+        <div>
+          <label for="clientName" class="form-label">Customer Name</label>
+          <input type="text" id="clientName" class="form-control" placeholder="Client Name">
+        </div>
+      </div>
+      <div class="flex-row mb-3">
+        <div>
+          <label for="currency" class="form-label">Currency</label>
+          <select id="currency" class="form-select">
+            <option value="£">£ - GBP</option>
+            <option value="$">$ - USD</option>
+            <option value="€">€ - EUR</option>
+            <option value="¥">¥ - JPY</option>
+            <option value="₹">₹ - INR</option>
+          </select>
+        </div>
+        <div>
+          <label for="taxRate" class="form-label">Tax Rate (%)</label>
+          <input type="number" id="taxRate" class="form-control" value="20" min="0" step="0.01">
+        </div>
+      </div>
+      <!-- Items Table -->
+      <h2>Items</h2>
+      <table class="table">
+        <thead>
+          <tr><th>Description</th><th>Qty</th><th>Price</th><th>Total</th><th></th></tr>
+        </thead>
+        <tbody id="itemsBody"></tbody>
+        <tfoot>
+          <tr><td colspan="2"></td><td>Subtotal:</td><td id="subtotal">£0.00</td><td></td></tr>
+          <tr><td colspan="2"></td><td>Tax:</td><td id="taxAmount">£0.00</td><td></td></tr>
+          <tr><td colspan="2"></td><td>Total:</td><td id="quoteTotal">£0.00</td><td></td></tr>
+        </tfoot>
+      </table>
+      <button type="button" id="addItemBtn" class="btn btn-outline-primary">+ Add Item</button>
+      <!-- Preview & Download -->
+      <h3 class="mt-4">Quote Preview</h3>
+      <div id="pdfPreviewContainer"></div>
+      <div class="mt-3">
+        <button type="button" id="generatePreviewBtn" class="btn btn-primary">Generate Preview</button>
+        <button type="button" id="downloadPdfBtn" class="btn btn-success">Download PDF</button>
+      </div>
+    </form>
+  </div>
+  <div data-include="footer.html"></div>
+
+  <script>
+    // Helper to format currency
+    function formatCurrency(value, symbol) {
+      return symbol + value.toFixed(2);
+    }
+    // To DataURL
+    function toDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const itemsBody = document.getElementById('itemsBody');
+      const currencyEl = document.getElementById('currency');
+      const taxRateEl = document.getElementById('taxRate');
+      const subtotalEl = document.getElementById('subtotal');
+      const taxAmountEl = document.getElementById('taxAmount');
+      const quoteTotalEl = document.getElementById('quoteTotal');
+      const previewContainer = document.getElementById('pdfPreviewContainer');
+
+      function updateTotals() {
+        let subtotal = 0;
+        itemsBody.querySelectorAll('tr').forEach(row => {
+          const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+          const price = parseFloat(row.querySelector('.item-price').value) || 0;
+          const total = qty * price;
+          row.querySelector('.item-total').textContent = formatCurrency(total, currencyEl.value);
+          subtotal += total;
+        });
+        
+        const tax = subtotal * (parseFloat(taxRateEl.value) / 100);
+        const totalQuote = subtotal + tax;
+        subtotalEl.textContent = formatCurrency(subtotal, currencyEl.value);
+        taxAmountEl.textContent = formatCurrency(tax, currencyEl.value);
+        quoteTotalEl.textContent = formatCurrency(totalQuote, currencyEl.value);
+      }
+
+      currencyEl.addEventListener('change', updateTotals);
+      taxRateEl.addEventListener('input', updateTotals);
+
+      function createItemRow() {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><input type="text" class="form-control item-desc" placeholder="Item description"></td>
+          <td><input type="number" class="form-control item-qty" value="1"></td>
+          <td><input type="number" class="form-control item-price" value="0.00"></td>
+          <td class="item-total">£0.00</td>
+          <td><button type="button" class="btn btn-sm btn-danger remove-item-btn">&times;</button></td>
+        `;
+        tr.querySelector('.item-qty').addEventListener('input', updateTotals);
+        tr.querySelector('.item-price').addEventListener('input', updateTotals);
+        tr.querySelector('.remove-item-btn').addEventListener('click', () => { tr.remove(); updateTotals(); });
+        return tr;
+      }
+
+      document.getElementById('addItemBtn').addEventListener('click', () => {
+        itemsBody.appendChild(createItemRow());
+        updateTotals();
+      });
+      // initial row
+      itemsBody.appendChild(createItemRow());
+      updateTotals();
+
+      async function generatePreview() {
+        // collect form data
+        const data = {
+          companyName: document.getElementById('companyName').value.trim(),
+          companyEmail: document.getElementById('companyEmail').value.trim(),
+          companyPhone: document.getElementById('companyPhone').value.trim(),
+          notes: document.getElementById('notes').value.trim(),
+          quoteNumber: document.getElementById('quoteNumber').value.trim(),
+          quoteDate: document.getElementById('quoteDate').value,
+          clientName: document.getElementById('clientName').value.trim(),
+          currency: currencyEl.value,
+          taxRate: parseFloat(taxRateEl.value) || 0,
+          items: [],
+          logoURL: null
+        };
+        const logoFile = document.getElementById('companyLogo').files[0];
+        if (logoFile) data.logoURL = await toDataURL(logoFile);
+        // gather items
+        itemsBody.querySelectorAll('tr').forEach(row => {
+          const desc = row.querySelector('.item-desc').value.trim();
+          const qty = parseFloat(row.querySelector('.item-qty').value) || 0;
+          const price = parseFloat(row.querySelector('.item-price').value) || 0;
+          if (desc) data.items.push({ desc, qty, price });
+        });
+        // build preview
+        let html = '<div>';        
+        if (data.logoURL) html += `<img src="${data.logoURL}" style="max-height:80px;"/><br/>`;
+        html += `<h2>${data.companyName}</h2>`;
+        html += `<p>${data.companyEmail} | ${data.companyPhone}</p>`;
+        html += `<p><strong>Quote #:</strong> ${data.quoteNumber}</p>`;
+        html += `<p><strong>Date:</strong> ${data.quoteDate}</p>`;
+        html += `<p><strong>Client:</strong> ${data.clientName}</p>`;
+        html += `<hr/><table style="width:100%; border-collapse: collapse;">`;
+        html += `<thead><tr><th>Description</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>`;
+        data.items.forEach(item => {
+          html += `<tr>` +
+                  `<td>${item.desc}</td>` +
+                  `<td>${item.qty}</td>` +
+                  `<td>${data.currency}${item.price.toFixed(2)}</td>` +
+                  `<td>${data.currency}${(item.qty*item.price).toFixed(2)}</td>` +
+                  `</tr>`;
+        });
+        html += `</tbody></table>`;
+        html += `<p style="text-align:right;"><strong>Subtotal:</strong> ${subtotalEl.textContent}</p>`;
+        html += `<p style="text-align:right;"><strong>Tax:</strong> ${taxAmountEl.textContent}</p>`;
+        html += `<p style="text-align:right;"><strong>Total:</strong> ${quoteTotalEl.textContent}</p>`;
+        if (data.notes) html += `<p><em>${data.notes}</em></p>`;
+        html += `</div>`;
+        previewContainer.innerHTML = html;
+      }
+      document.getElementById('generatePreviewBtn').addEventListener('click', generatePreview);
+
+      document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
+        if (!previewContainer.innerHTML) { alert('Generate the preview first!'); return; }
+        await html2pdf().set({ margin:10, filename:`Quote-${document.getElementById('quoteNumber').value||'Generated'}.pdf`, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2,useCORS:true}, jsPDF:{unit:'pt', format:'a4',orientation:'portrait'} }).from(previewContainer).save();
+      });
+    });
+  </script>
+  <script src="js/main.js"></script>
+  <script>document.addEventListener('DOMContentLoaded', () => {
+  const includes = document.querySelectorAll('[data-include]');
+  includes.forEach(async el => {
+    const file = el.getAttribute('data-include');
+    if (file) {
+      try {
+        const response = await fetch(file);
+        if (response.ok) {
+          const text = await response.text();
+          el.innerHTML = text;
+        } else {
+          el.innerHTML = `<p>Failed to load ${file}</p>`;
+        }
+      } catch (err) {
+        el.innerHTML = `<p>Error loading ${file}</p>`;
+      }
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+<!--END-->
