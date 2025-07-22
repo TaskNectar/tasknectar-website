@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Free Invoice Generator | TaskNectar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Create and download professional invoices for free with TaskNectar's Invoice Generator. Easy to use, no sign-up required, ideal for small businesses and freelancers.">
+  <meta name="keywords" content="free invoice generator, invoice maker, invoice template, download invoice PDF, create invoice online, TaskNectar, small business tools">
+  <meta name="author" content="TaskNectar">
+  <link rel="canonical" href="https://www.tasknectar.com/invoice-generator" />
+
+  <!-- Open Graph (OG) Meta Tags -->
+  <meta property="og:title" content="Free Invoice Generator | TaskNectar">
+  <meta property="og:description" content="Create invoices quickly with TaskNectar’s free invoice generator. Customise, preview and download invoices as PDFs with no sign-up.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.tasknectar.com/invoice-generator">
+  <meta property="og:image" content="https://www.tasknectar.com/assets/invoice-generator-preview.png">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Free Invoice Generator | TaskNectar">
+  <meta name="twitter:description" content="Create and download custom invoices for free online. No login needed. Great for freelancers and small businesses.">
+  <meta name="twitter:image" content="https://www.tasknectar.com/assets/invoice-generator-preview.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/TaskNectar/img/TaskNectar Favicon.png">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/invoice-generator.css" />
+</head>
+
+
+<body>
+   <div data-include="header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Free Invoice Generator</h1>
+    <p>Create professional invoices for free in seconds. Just enter your details, preview your invoice, and download as a PDF — no sign-up required.</p>
+    <p><i>For best results, use on desktop</i></p>
+  </div>
+</section>
+
+<!-- Invoice Generator-->
+<div class="invoice-container">
+  <h2>Fill Out Your Details</h2>
+
+  <div class="company-info">
+  <label>
+    Your Company Name:
+    <input type="text" id="company-name" placeholder="Your Company Name" />
+  </label>
+  <div class="email-phone-row">
+    <label style="flex:1; margin-right: 10px;">
+      Your Company Email:
+      <input type="email" id="company-email" placeholder="you@example.com" />
+    </label>
+    <label style="flex:1;">
+      Your Company Phone Number:
+      <input type="tel" id="company-phone" placeholder="+44 1234 567890" />
+    </label>
+  </div>
+</div>
+<div class="logo-upload">
+  <label>
+    Upload Logo:
+    <input type="file" id="logo-upload" accept="image/*" />
+  </label>
+  <button id="remove-logo" type="button">Remove Logo</button>
+</div>
+  <div class="notes-section">
+    <label>
+      Notes / Payment Info:
+      <textarea id="invoice-notes" placeholder="Enter BACS info, address details, VAT number, etc. here..."></textarea>
+    </label>
+  </div>
+  <div class="invoice-info">
+    <label>
+      Invoice #: <input type="text" id="invoice-number" placeholder="001" />
+    </label>
+    <label>
+      Date: <input type="date" id="invoice-date" />
+    </label>
+    <label>
+      Client: <input type="text" id="client-name" placeholder="Client Name" />
+    </label>
+    <label>
+      Currency:
+      <select id="currency">
+        <option value="£" selected>£ (GBP)</option>
+        <option value="$">$ (USD)</option>
+        <option value="€">€ (EUR)</option>
+        <option value="₹">₹ (INR)</option>
+        <option value="¥">¥ (JPY)</option>
+      </select>
+    </label>
+    <label style="max-width: 150px;">
+      Tax Rate (%):
+      <input type="number" id="tax-rate" value="20" min="0" step="0.1" />
+    </label>
+  </div>
+
+  <table id="invoice-table">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Quantity</th>
+        <th>Unit Price</th>
+        <th>Line Total</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="invoice-body">
+      <tr>
+        <td><input type="text" class="desc" placeholder="Item description" /></td>
+        <td><input type="number" class="qty" value="1" min="1" /></td>
+        <td><input type="number" class="price" value="0.00" step="0.01" /></td>
+        <td class="line-total">£0.00</td>
+        <td><button class="remove-btn">✕</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button id="add-row" class="primary-btn">+ Add Item</button>
+  <button id="generate" class="primary-btn">Generate Preview</button>
+  <button id="download" class="primary-btn">Download PDF</button>
+
+  <div class="total-section">
+    <p><strong>Net Total:</strong> <span id="net-total">£0.00</span></p>
+    <p><strong>Tax:</strong> <span id="tax-total">£0.00</span></p>
+    <p><strong>Gross Total:</strong> <span id="total">£0.00</span></p>
+  </div>
+  <h2>Invoice Preview</h2>
+  <div id="preview" class="preview-box"></div>
+</div>
+<!-- Invoice Generator End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+            class="bi bi-arrow-up"></i></a>
+<div data-include="footer.html"></div>
+    <!-- Page Javascript -->
+  <script src="js/invoice-generator.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+ <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script>
+  document.querySelectorAll('[data-include]').forEach(async el => {
+  const file = el.getAttribute('data-include');
+  const res = await fetch(file);
+  const html = await res.text();
+  el.innerHTML = html;
+
+  // Re-initialize WOW animations after footer loads
+  if (typeof WOW === "function") {
+    new WOW().init();
+  }
+});
+    </script>
+  </body>
+</html>

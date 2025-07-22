@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>About TaskNectar</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Libraries Stylesheet -->
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  <!-- Bootstrap & Template Stylesheet -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/about.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Spinner Start -->
+  <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+  </div>
+  <!-- Spinner End -->
+
+  <!-- Header Include -->
+  <div data-include="header.html"></div>
+
+  <!-- Main Content Start -->
+  <main>
+
+    <!-- Hero Section -->
+    <section class="hero-content">
+      <div class="hero-content-content">
+        <h1>About TaskNectar</h1>
+      </div>
+    </section>
+
+    <!-- Who Are We -->
+    <section class="about-hero bg-soft">
+      <div class="container">
+        <div class="about-content">
+          <h2>Who Are We</h2>
+          <p>TaskNectar is a completely free suite of business utility tools designed for freelancers, small business owners, and anyone looking to get more done with less hassle.</p>
+          <p>No sign-up. No tracking. No hidden fees. Just useful tools that work.</p>
+        </div>
+        <div class="about-image">
+          <img src="img/tools-illustration.svg" alt="TaskNectar tools illustration" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Why We Exist -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-content reverse">
+          <div class="text">
+            <h2>Why We Exist</h2>
+            <p>TaskNectar was created to give freelancers and small business owners access to simple tools without needing to pay or sign up. We're building useful, no-fuss features that just work — instantly.</p>
+          </div>
+          <div class="image">
+            <img src="img/about-why.svg" alt="Why TaskNectar Exists" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support Section -->
+    <section class="about-hero bg-soft">
+      <div class="container">
+        <div class="about-content">
+          <h2>Support the Project</h2>
+          <p>TaskNectar is completely free. If our tools have helped you, you can support our work with a small donation — kind of like buying us a coffee. Every little bit keeps the lights on!</p>
+        </div>
+        <div class="support-us">
+          <img src="img/about-coffee.svg" alt="Support TaskNectar" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <!-- Main Content End -->
+
+  <!-- Footer Include -->
+  <div data-include="footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+
+  <!-- Custom Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/inventory-stock-tracker.js"></script>
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+
+      // Re-initialize WOW animations
+      if (typeof WOW === "function") {
+        new WOW().init();
+      }
+    });
+  </script>
+</body>
+
+</html>
