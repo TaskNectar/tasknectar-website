@@ -605,7 +605,7 @@
     .copyright {
     background: #597AFF;
     color: #fff;
-    margin-bottom: 9%;
+    margin-bottom: 9%!important;
 }
 
 }
