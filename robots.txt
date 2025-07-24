@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Disallow: /test/
+Allow: /
+
+Sitemap: https://tasknectar.com/sitemap.xml
