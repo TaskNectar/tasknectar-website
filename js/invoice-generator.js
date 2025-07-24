@@ -250,6 +250,9 @@ function generatePreview() {
         <div>Gross Total: ${total}</div>
       </div>
     </div>
+    <div class="invoice-footer" style="text-align: center; font-size: 0.85em; color: #666; padding-top: 30px; border-top: 1px solid #ddd;">
+      Invoice generated at <strong>TaskNectar.com</strong>
+    </div>
   `;
 
   const previewContainer = document.getElementById("preview");
