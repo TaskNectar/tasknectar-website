@@ -41,6 +41,58 @@
     .LogoMain {
         max-width: 80%;
     }
+
+    .dropdown-menu {
+      background-color: #ffde59 !important;
+      border: none;
+      padding: 0;
+      box-shadow: none;
+  }
+
+  .dropdown-menu .dropdown-item {
+      background-color: #ffde59 !important;
+      color: #000 !important;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-bottom: 5px solid #000;
+  }
+
+  .dropdown-menu .dropdown-item:last-child {
+      border-bottom: none;
+  }
+
+  .dropdown-menu .dropdown-item:hover {
+      background-color: #ffe97a;
+      color: #000;
+  }
+}
+
+/* Style dropdown background and items */
+.dropdown-menu {
+    background-color: #ffde59 !important; /* Matches your main menu color */
+    border: none;
+    padding: 0; /* Remove default padding */
+    box-shadow: none;
+}
+
+/* Style each dropdown item */
+.dropdown-menu .dropdown-item {
+    background-color: #ffde59 !important;
+    color: #000 !important;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-bottom: 5px solid #000; /* Thick black line between items */
+}
+
+/* Remove border from the last item */
+.dropdown-menu .dropdown-item:last-child {
+    border-bottom: none;
+}
+
+/* Optional: hover effect */
+.dropdown-menu .dropdown-item:hover {
+    background-color: #ffd98b; /* slightly lighter shade for hover */
+    color: #000;
 }
 
 /******** END MY CUSTOM CSS ***********/
