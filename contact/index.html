@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GYJSNCR46K');
+  </script>
+  <script>
+    if (window.location.pathname === '/index.html') {
+      window.location.replace('/');
+    }
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7609988011266328"
+     crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <title>TaskNectar | Free Business Utility Tools</title>
+  <meta name="description" content="TaskNectar provides free, easy-to-use business tools including an Invoice Generator, Inventory Stock Counter, and Quote Estimator – all from your browser. No sign-up needed.">
+  <meta name="keywords" content="invoice generator, quote estimator, stock counter, business tools, small business, freelancer tools, free invoice tool, online quote maker, inventory tracker">
+  <meta name="author" content="TaskNectar">
+  <meta name="robots" content="index, follow">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <link rel="canonical" href="https://www.tasknectar.com/" />
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/img/favicon.png" rel="icon">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fff;
+      color: #000;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .contact-wrapper {
+      background-color: #fff;
+      padding: 2.5rem;
+      max-width: 600px;
+      width: 90%;
+      margin: 2rem auto;
+      border-radius: 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p.description {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input,
+    textarea,
+    select {
+      padding: 0.75rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 1rem;
+      width: 100%;
+      transition: border-color 0.2s;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #efb301;
+      outline: none;
+    }
+
+    button {
+      background-color: #efb301;
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 999px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: #dca000;
+    }
+
+    .contact-details,
+    .additional-links {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    .success-message, .error-message {
+      display: none;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    .success-message {
+      color: green;
+    }
+    .error-message {
+      color: red;
+    }
+
+    @media (max-width: 480px) {
+      .contact-wrapper {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Include -->
+  <div data-include="/header.html"></div>
+
+  <div class="contact-wrapper">
+    <h1>Contact TaskNectar</h1>
+    <p class="description">Have a question or suggestion? We’d love to hear from you. Fill out the form below and we’ll get back to you soon.</p>
+
+    <form id="contact-form" action="https://formspree.io/f/mldlnyzq" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+
+      <select name="reason" required>
+        <option value="general">General Contact</option>
+        <option value="feedback">General Feedback</option>
+        <option value="bug">Report a Bug</option>
+        <option value="feature">Suggest a Feature</option>
+        <option value="other">Other</option>
+      </select>
+
+      <input type="text" name="tool" placeholder="Tool you're asking about (optional)" />
+
+      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+
+    <p class="success-message" id="form-success">✅ Thanks! Your message has been sent.</p>
+    <p class="error-message" id="form-error">❌ Oops! Something went wrong. Please try again.</p>
+
+    <div class="contact-details">
+      <p><strong>Email:</strong> <a href="mailto:info@tasknectar.com">info@tasknectar.com</a></p>
+    </div>
+
+    <div class="additional-links">
+      <p><strong>Check out the tools</strong></p>
+      <ul style="padding-left: 1.2rem; margin: 0;">
+        <li><a href="/all-tools">Browse All Tools</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Footer Include -->
+  <div data-include="/footer.html"></div>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/main.js"></script>
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contact-form');
+      const successMessage = document.getElementById('form-success');
+      const errorMessage = document.getElementById('form-error');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            form.reset();
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+          } else {
+            throw new Error('Network response was not ok.');
+          }
+        } catch (error) {
+          errorMessage.style.display = 'block';
+          successMessage.style.display = 'none';
+        }
+
+        // Hide messages after 5 seconds
+        setTimeout(() => {
+          successMessage.style.display = 'none';
+          errorMessage.style.display = 'none';
+        }, 5000);
+      });
+    });
+  </script>
+
+</body>
+</html>
