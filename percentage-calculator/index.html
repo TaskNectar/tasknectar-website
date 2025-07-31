@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GYJSNCR46K');
+</script>
+    <meta charset="utf-8">
+<title>Percentage Calculator Tools | TaskNectar</title>
+<meta name="title" content="Percentage Calculator Tools | Quick & Easy Percentage Calculations | TaskNectar">
+<meta name="description" content="Use TaskNectar’s free Percentage Calculator Tools to find percentages, calculate percentage changes, and solve common percentage problems quickly and accurately. Perfect for students, professionals, and everyday math.">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="../img/TaskNextar Favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+    <style>
+      .calculator-wrapper {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+      @media (max-width: 600px) {
+  .card {
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Percentage Calculator Tools</h1>
+    <p>Quickly solve common percentage problems with ease. Whether you want to find a percentage of a number, determine what percent one number is of another, or calculate percentage changes, these tools make it simple and fast.</p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Simplify Your Percentage Calculations with TaskNectar</h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Whether you're a student, business professional, or just handling everyday math, understanding percentages is essential. TaskNectar’s Percentage Calculator Tools help you quickly and accurately handle the most common percentage problems without hassle.
+  </p>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Use these easy-to-use calculators to find what X% of a number is, calculate what percentage one number is of another, or determine the percentage increase or decrease between two values. The interface is mobile-friendly and designed to give clear, instant results to help you make decisions faster.
+  </p>
+</section>
+
+
+<section class="percent-tools">
+  <h2>Percentage Calculator Tools</h2>
+
+  <!-- Tool 1 -->
+  <div class="percent-tool">
+    <div class="label-line">
+      <span>1. What is</span>
+      <input type="number" id="x1" placeholder="X">
+      <span class="percent-sign">%</span>
+      <span>of</span>
+      <input type="number" id="y1" placeholder="Y">
+      <button id="btn1-desktop" onclick="toggleCalculate(1)">Calculate</button>
+      <div id="result1" class="result-box">—</div>
+    </div>
+    <!-- duplicate button+output for mobile only -->
+    <div class="row-bottom">
+      <button id="btn1-mobile" onclick="toggleCalculate(1)">Calculate</button>
+      <div id="result1-mobile" class="result-box">—</div>
+    </div>
+  </div>
+
+  <!-- Tool 2 -->
+  <div class="percent-tool">
+    <div class="label-line">
+      <span>2.</span>
+      <input type="number" id="x2" placeholder="X">
+      <span>is what percent of</span>
+      <input type="number" id="y2" placeholder="Y">
+      <button id="btn2-desktop" onclick="toggleCalculate(2)">Calculate</button>
+      <div id="result2" class="result-box">—</div>
+    </div>
+    <div class="row-bottom">
+      <button id="btn2-mobile" onclick="toggleCalculate(2)">Calculate</button>
+      <div id="result2-mobile" class="result-box">—</div>
+    </div>
+  </div>
+
+  <!-- Tool 3 -->
+  <div class="percent-tool">
+    <div class="label-line">
+      <span>3. What is the % change from</span>
+      <input type="number" id="x3" placeholder="X">
+      <span>to</span>
+      <input type="number" id="y3" placeholder="Y">
+      <button id="btn3-desktop" onclick="toggleCalculate(3)">Calculate</button>
+      <div id="result3" class="result-box">—</div>
+    </div>
+    <div class="row-bottom">
+      <button id="btn3-mobile" onclick="toggleCalculate(3)">Calculate</button>
+      <div id="result3-mobile" class="result-box">—</div>
+    </div>
+  </div>
+</section>
+
+<style>
+.percent-tools {
+  background: #fff8ec;
+  padding: 2rem 1rem;
+  max-width: 1000px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  border-radius: 12px;
+}
+
+.percent-tools h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #000;
+}
+
+.percent-tool {
+  background: #fff;
+  border: 2px solid #ffc170;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Label line container: row layout on desktop */
+.label-line {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+}
+
+/* Inputs: flexible width, full height */
+.label-line input[type="number"] {
+  flex: 1 1 95px;
+  min-width: 80px;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+/* Percent sign next to input */
+.label-line .percent-sign {
+  flex: 0 0 auto;
+  font-weight: bold;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* Buttons and results inside label-line */
+.label-line button {
+  flex: 0 0 auto;
+  background-color: #efb301;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.label-line .result-box {
+  flex: 0 0 120px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+  margin-left: 0.5rem;
+}
+
+/* Mobile row-bottom container (hidden by default) */
+.row-bottom {
+  display: none;
+}
+
+/* MOBILE STYLES */
+@media (max-width: 600px) {
+  /* Hide the buttons and outputs inside label-line on mobile */
+  .label-line button,
+  .label-line .result-box {
+    display: none;
+  }
+
+  /* Show mobile row-bottom container */
+  .row-bottom {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
+  .row-bottom button,
+  .row-bottom .result-box {
+    flex: 1 1 48%;
+    min-width: 48%;
+    background-color: inherit;
+  }
+
+  .row-bottom button {
+    background-color: #efb301;
+    color: #000;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    white-space: nowrap;
+  }
+
+  .row-bottom .result-box {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-weight: bold;
+    text-align: center;
+    user-select: none;
+  }
+}
+</style>
+
+<script>
+function toggleCalculate(toolNum) {
+  const btnDesktop = document.getElementById(`btn${toolNum}-desktop`);
+  const btnMobile = document.getElementById(`btn${toolNum}-mobile`);
+  const isCalculate = btnDesktop.textContent === "Calculate";
+
+  if (isCalculate) {
+    // Calculate and show result, change buttons to Reset
+    if (toolNum === 1) calculatePercentOf();
+    else if (toolNum === 2) calculateWhatPercent();
+    else if (toolNum === 3) calculateChange();
+
+    btnDesktop.textContent = "Reset";
+    btnMobile.textContent = "Reset";
+  } else {
+    // Reset inputs and outputs, change buttons to Calculate
+    resetTool(toolNum);
+    btnDesktop.textContent = "Calculate";
+    btnMobile.textContent = "Calculate";
+  }
+}
+
+function resetTool(toolNum) {
+  document.getElementById(`x${toolNum}`).value = "";
+  document.getElementById(`y${toolNum}`).value = "";
+  document.getElementById(`result${toolNum}`).textContent = "—";
+  document.getElementById(`result${toolNum}-mobile`).textContent = "—";
+}
+
+function calculatePercentOf() {
+  const x = parseFloat(document.getElementById('x1').value);
+  const y = parseFloat(document.getElementById('y1').value);
+  const outputDesktop = document.getElementById('result1');
+  const outputMobile = document.getElementById('result1-mobile');
+  if (!isNaN(x) && !isNaN(y)) {
+    const result = (x / 100) * y;
+    outputDesktop.textContent = result.toFixed(2);
+    outputMobile.textContent = result.toFixed(2);
+  } else {
+    outputDesktop.textContent = '—';
+    outputMobile.textContent = '—';
+  }
+}
+
+function calculateWhatPercent() {
+  const x = parseFloat(document.getElementById('x2').value);
+  const y = parseFloat(document.getElementById('y2').value);
+  const outputDesktop = document.getElementById('result2');
+  const outputMobile = document.getElementById('result2-mobile');
+  if (!isNaN(x) && !isNaN(y) && y !== 0) {
+    const result = (x / y) * 100;
+    outputDesktop.textContent = result.toFixed(2) + '%';
+    outputMobile.textContent = result.toFixed(2) + '%';
+  } else {
+    outputDesktop.textContent = '—';
+    outputMobile.textContent = '—';
+  }
+}
+
+function calculateChange() {
+  const x = parseFloat(document.getElementById('x3').value);
+  const y = parseFloat(document.getElementById('y3').value);
+  const outputDesktop = document.getElementById('result3');
+  const outputMobile = document.getElementById('result3-mobile');
+  if (!isNaN(x) && !isNaN(y) && x !== 0) {
+    const result = ((y - x) / Math.abs(x)) * 100;
+    outputDesktop.textContent = (result > 0 ? '+' : '') + result.toFixed(2) + '%';
+    outputMobile.textContent = (result > 0 ? '+' : '') + result.toFixed(2) + '%';
+  } else {
+    outputDesktop.textContent = '—';
+    outputMobile.textContent = '—';
+  }
+}
+</script>
+
+
+
+
+
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+</body>
+
+
+
+</html>
