@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GYJSNCR46K');
+</script>
+    <meta charset="utf-8">
+<title>Online Countdown Timer | TaskNectar</title>
+<meta name="title" content="Online Countdown Timer | TaskNectar">
+<meta name="description" content="Use TaskNectar’s free Countdown Timer to set and track custom timers with ease. Choose presets or enter your own hours, minutes, and seconds. Get alerts via popup or alarm when time’s up — perfect for work, cooking, exercise, and more.">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+<style>
+  .countdown-wrapper {
+    font-family: sans-serif;
+    background: #ffc170;
+    color: #000;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  .timer-display {
+    font-size: 5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+    border: 2px solid #000;
+    padding: 10px 30px;
+    display: inline-block;
+    border-radius: 10px;
+    background: #fff3d1;
+  }
+
+  .presets, .control-row, .settings {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  button {
+    padding: 10px 15px;
+    border: 2px solid #000;
+    background: #EFB301;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.2s;
+  }
+
+  button:hover {
+    background: #ffd449;
+  }
+
+  input[type="number"], select {
+    padding: 6px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #000;
+    width: 80px;
+  }
+
+  label {
+    font-weight: bold;
+    align-self: center;
+  }
+
+select {
+  padding: 6px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #000;
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  .countdown-wrapper {
+    padding: 1rem;
+  }
+
+  .timer-display {
+    font-size: 3rem;
+    margin: 1rem auto;
+  }
+
+  .presets,
+  .control-row,
+  .settings {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  button {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+
+  .settings input[type="number"] {
+    width: 60px;
+  }
+
+  select {
+    min-width: 160px;
+  }
+}
+
+</style>
+
+</style>
+
+
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Countdown Timer</h1>
+    <p>Set a countdown for any duration—from seconds to hours—and track your time precisely. Choose from presets or enter a custom time in hours, minutes, and seconds, then start, pause, reset, or clear the timer with ease.</p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Perfect for staying on track with work, school, daily tasks, and more </h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Whether you’re managing focused work periods, timing your cooking, or tracking exercise intervals, this Countdown Timer keeps you on schedule. Use convenient preset durations or customize your own to fit any task.
+  </p>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    When the timer reaches zero, choose to get a clear popup alert or an alarm sound to make sure you never miss a beat. It’s a simple yet powerful timer tool designed for productivity, cooking, study sessions, and everyday timing needs.
+  </p>
+</section>
+
+
+<div class="countdown-wrapper">
+  <!-- Presets -->
+  <div class="presets">
+    <button onclick="setTimer(30)">30s</button>
+    <button onclick="setTimer(60)">1m</button>
+    <button onclick="setTimer(300)">5m</button>
+    <button onclick="setTimer(600)">10m</button>
+    <button onclick="setTimer(1800)">30m</button>
+    <button onclick="setTimer(3600)">60m</button>
+  </div>
+
+  <!-- Display -->
+  <div class="timer-display" id="timerDisplay">00:00:00</div>
+
+  <!-- Controls -->
+  <div class="control-row">
+    <button id="startPauseBtn" onclick="toggleTimer()">Start</button>
+    <button onclick="resetTimer()">Reset</button>
+    <button onclick="clearTimer()">Clear</button>
+  </div>
+
+  <!-- Custom Time -->
+  <div class="settings">
+    <label for="customHours">Custom:</label>
+    <input type="number" id="customHours" min="0" placeholder="Hours">
+    <input type="number" id="customMinutes" min="0" placeholder="Minutes">
+    <input type="number" id="customSeconds" min="0" placeholder="Seconds">
+    <button onclick="setCustomTime()">Set</button>
+  </div>
+
+  <!-- End Action -->
+  <div class="settings">
+    <label for="endAction">When timer ends:</label>
+    <select id="endAction">
+      <option value="alarm">Play Alarm</option>
+      <option value="popup">Show Popup</option>
+    </select>
+  </div>
+
+<audio id="alarmSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
+</div>
+
+<!--Countdown JS-->
+<script>
+let timerDuration = 0;
+let timerRemaining = 0;
+let timerInterval = null;
+let isRunning = false;
+
+function formatTime(seconds) {
+  const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+  const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+  const s = String(seconds % 60).padStart(2, '0');
+  return `${h}:${m}:${s}`;
+}
+
+function updateDisplay() {
+  document.getElementById("timerDisplay").textContent = formatTime(timerRemaining);
+}
+
+function setTimer(seconds) {
+  clearInterval(timerInterval);
+  timerDuration = timerRemaining = seconds;
+  updateDisplay();
+  isRunning = false;
+  updateStartPauseButton();
+}
+
+function setCustomTime() {
+  const h = parseInt(document.getElementById("customHours").value) || 0;
+  const m = parseInt(document.getElementById("customMinutes").value) || 0;
+  const s = parseInt(document.getElementById("customSeconds").value) || 0;
+  const total = h * 3600 + m * 60 + s;
+
+  if (total > 0) {
+    setTimer(total);
+  }
+}
+
+function toggleTimer() {
+  const btn = document.getElementById("startPauseBtn");
+  if (isRunning) {
+    // Pause timer
+    clearInterval(timerInterval);
+    isRunning = false;
+    btn.textContent = "Start";
+  } else {
+    // Start timer
+    if (timerRemaining <= 0) return; // Don't start if no time set
+
+    isRunning = true;
+    btn.textContent = "Pause";
+
+    timerInterval = setInterval(() => {
+      timerRemaining--;
+      updateDisplay();
+
+      if (timerRemaining <= 0) {
+        clearInterval(timerInterval);
+        isRunning = false;
+        btn.textContent = "Start";
+        handleTimerEnd();
+      }
+    }, 1000);
+  }
+}
+
+function resetTimer() {
+  timerRemaining = timerDuration;
+  updateDisplay();
+  clearInterval(timerInterval);
+  isRunning = false;
+  updateStartPauseButton();
+}
+
+function clearTimer() {
+  timerDuration = 0;
+  timerRemaining = 0;
+  updateDisplay();
+  clearInterval(timerInterval);
+  isRunning = false;
+
+  // Clear custom input fields
+  document.getElementById("customHours").value = "";
+  document.getElementById("customMinutes").value = "";
+  document.getElementById("customSeconds").value = "";
+
+  updateStartPauseButton();
+}
+
+function updateStartPauseButton() {
+  const btn = document.getElementById("startPauseBtn");
+  btn.textContent = "Start";
+}
+
+function handleTimerEnd() {
+  const action = document.getElementById("endAction").value;
+  if (action === "alarm") {
+    document.getElementById("alarmSound").play();
+  } else {
+    alert("Time's up!");
+  }
+}
+</script>
+
+<!--Countdown End JS-->
+
+
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+</body>
+
+
+
+</html>
