@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-GYJSNCR46K');
+  </script>
+  <meta charset="utf-8">
+  <title>Online Stopwatch | TaskNectar</title>
+  <meta name="title" content="Online Stopwatch | TaskNectar">
+  <meta name="description" content="Use TaskNectar’s free online stopwatch to track your time precisely. Start, stop, split (lap), and clear the stopwatch with ease—perfect for work, exercise, or any timing needs.">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <!-- Favicon -->
+  <link href="/img/favicon.png" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="/css/style.css" rel="stylesheet">
+
+  <style>
+    .countdown-wrapper {
+      font-family: sans-serif;
+      background: #ffc170;
+      color: #000;
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 2rem;
+      text-align: center;
+      border-radius: 8px;
+    }
+
+    .timer-display {
+      font-size: 5rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      border: 2px solid #000;
+      padding: 10px 30px;
+      display: inline-block;
+      border-radius: 10px;
+      background: #fff3d1;
+      user-select: none;
+    }
+
+    .control-row {
+      margin: 10px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button {
+      padding: 10px 15px;
+      border: 2px solid #000;
+      background: #EFB301;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.2s;
+      min-width: 90px;
+    }
+
+    button:hover {
+      background: #ffd449;
+    }
+
+    table {
+      margin: 1rem auto 0 auto;
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    th, td {
+      border: 1px solid #000;
+      padding: 8px 12px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-align: center;
+      background: #fff3d1;
+    }
+
+    th {
+      background: #EFB301;
+    }
+
+    @media (max-width: 600px) {
+      .countdown-wrapper {
+        padding: 1rem;
+      }
+
+      .timer-display {
+        font-size: 3rem;
+        margin: 1rem auto;
+      }
+
+      .control-row {
+        gap: 8px;
+      }
+
+      button {
+        width: auto;
+        padding: 8px 12px;
+        font-size: 0.95rem;
+        min-width: 75px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Online Stopwatch</h1>
+    <p>
+      Easily track elapsed time with this online Stopwatch. Use Start/Stop to control timing, Split to record lap times shown below, and Clear to reset. Perfect for workouts, tasks, or any activity that needs precise timing.
+    </p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Ideal for work intervals, exercise laps, and more</h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Whether timing focused work sessions or tracking exercise laps, this Stopwatch helps you stay accurate and organized. Its clear display and lap table make it easy to see your progress at a glance.
+  </p>
+</section>
+
+
+
+  <div class="countdown-wrapper">
+    <!-- Display -->
+    <div class="timer-display" id="timerDisplay">00:00:00</div>
+
+    <!-- Controls -->
+    <div class="control-row">
+      <button id="startStopBtn" onclick="toggleStopwatch()">Start</button>
+      <button id="splitBtn" onclick="recordSplit()" disabled>Split</button>
+      <button id="clearBtn" onclick="clearStopwatch()" disabled>Clear</button>
+    </div>
+
+    <!-- Splits Table -->
+    <table id="splitsTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>Split #</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+      <tbody id="splitsBody">
+      </tbody>
+    </table>
+  </div>
+<section class="related-tool-callout">
+  <h2>Related Tool</h2>
+  <p>For precise timekeeping during work sessions, study periods, or other important activities, try our <a href="/countdown-timer/">Countdown Timer</a>. Set custom durations and alerts to help you stay focused and on schedule.</p>
+</section>
+
+
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+
+  <!-- Stopwatch JS -->
+  <script>
+    let elapsedSeconds = 0;
+    let stopwatchInterval = null;
+    let isRunning = false;
+    let splitCount = 0;
+
+    function formatTime(seconds) {
+      const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
+      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      return `${h}:${m}:${s}`;
+    }
+
+    function updateDisplay() {
+      document.getElementById("timerDisplay").textContent = formatTime(elapsedSeconds);
+    }
+
+    function toggleStopwatch() {
+      const startStopBtn = document.getElementById("startStopBtn");
+      const splitBtn = document.getElementById("splitBtn");
+      const clearBtn = document.getElementById("clearBtn");
+
+      if (isRunning) {
+        // Stop
+        clearInterval(stopwatchInterval);
+        isRunning = false;
+        startStopBtn.textContent = "Start";
+        splitBtn.disabled = true;
+      } else {
+        // Start
+        isRunning = true;
+        startStopBtn.textContent = "Stop";
+        splitBtn.disabled = false;
+        clearBtn.disabled = false;
+
+        stopwatchInterval = setInterval(() => {
+          elapsedSeconds++;
+          updateDisplay();
+        }, 1000);
+      }
+    }
+
+    function recordSplit() {
+      splitCount++;
+      const splitsTable = document.getElementById("splitsTable");
+      const splitsBody = document.getElementById("splitsBody");
+
+      if (splitsTable.style.display === "none") {
+        splitsTable.style.display = "table";
+      }
+
+      const tr = document.createElement("tr");
+      const tdNum = document.createElement("td");
+      const tdTime = document.createElement("td");
+
+      tdNum.textContent = splitCount;
+      tdTime.textContent = formatTime(elapsedSeconds);
+
+      tr.appendChild(tdNum);
+      tr.appendChild(tdTime);
+
+      splitsBody.appendChild(tr);
+    }
+
+    function clearStopwatch() {
+      clearInterval(stopwatchInterval);
+      isRunning = false;
+      elapsedSeconds = 0;
+      splitCount = 0;
+      updateDisplay();
+
+      // Reset buttons
+      document.getElementById("startStopBtn").textContent = "Start";
+      document.getElementById("splitBtn").disabled = true;
+      document.getElementById("clearBtn").disabled = true;
+
+      // Clear splits table
+      const splitsBody = document.getElementById("splitsBody");
+      splitsBody.innerHTML = "";
+      document.getElementById("splitsTable").style.display = "none";
+    }
+
+    // Initialize display on page load
+    updateDisplay();
+  </script>
+</body>
+
+</html>
