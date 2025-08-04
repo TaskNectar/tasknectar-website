@@ -105,11 +105,10 @@
 
 /* Style each dropdown item */
 .dropdown-menu .dropdown-item {
-    background-color: #ffde59 !important;
     color: #000 !important;
     padding: 12px 20px;
     font-size: 1rem;
-    border-bottom: 5px solid #000; /* Thick black line between items */
+    border-bottom: 2px solid #000; /* Thick black line between items */
 }
 
 /* Remove border from the last item */
@@ -259,6 +258,11 @@
         visibility: visible;
         transition: .5s;
         opacity: 1;
+        border-bottom-left-radius:30px;
+        border-bottom-right-radius:30px;
+        border-top-right-radius: 0px;
+        border-top-left-radius: 0px;
+
     }
 }
 

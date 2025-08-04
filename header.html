@@ -3,82 +3,180 @@
 <head>
     <!-- Favicon -->
     <link href="/img/TaskNectar Favicon.png" rel="icon">
-     <script src="https://analytics.ahrefs.com/analytics.js" data-key="jiWpoM5l/GcYbHPlQSXZBw" async></script>
-</head>
- <!-- Topbar Start -->
-    <div class="container-fluid bg-primary text-white d-none d-lg-flex">
-        <div class="container py-3">
-            <div class="d-flex align-items-center">
-                <a href="/">
-                    <img class="LogoMain" src="/img/TaskNectar-svg.svg">
-                </a>
-                <div class="ms-auto d-flex align-items-center">
-                    <small class="ms-4"><i class="fa fa-envelope me-3"></i><a style="color:#000000;text-decoration: underline;" href="mailto:info@tasknectar.com">info@tasknectar.com</a></small>
-                    <small class="ms-4"><i></i></small>
-                    <!--<div class="ms-3 d-flex">
-                        <a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href=""><i
-                                class="fab fa-facebook-f"></i></a>
-                        <a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href=""><i
-                                class="fab fa-instagram"></i></a>
-                        <a class="btn btn-sm-square btn-light text-primary rounded-circle ms-2" href=""><i
-                                class="fab fa-linkedin-in"></i></a>
-                    </div>-->
-                     <div class="ms-auto d-none d-lg-block">
-                        <a href="/#tools" class="btn btn-primary rounded-pill py-2 px-3">Get Started</a>
-                    </div>
-                    <form action="https://www.paypal.com/donate" method="post" target="_blank">
-  <input type="hidden" name="hosted_button_id" value="3JGJEECLSHVY2" />
-  <input type="submit" value="Buy us a Coffee" class="btn btn-primary" style="background:#597AFF; color: #fff !important; border:solid; border-radius:25px; padding:10px 20px; margin-left: 1rem;" />
-</form>
+    <script src="https://analytics.ahrefs.com/analytics.js" data-key="jiWpoM5l/GcYbHPlQSXZBw" async></script>
+<style>
+    /* Desktop Mega Menu */
+    @media (min-width: 992px) {
+        .mega-dropdown .dropdown-menu {
+            display: none;
+            position: absolute;
+            width: 100%;
+            top: 100%;
+            left: 0;
+            right: 0;
+            padding: 2rem 3rem;
+            background-color: #fff;
+            border: none;
+            border-top: 4px solid #ffc170;
+        background-color: #ffe4a0!important; /* soft yellow highlight */
 
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+        }
+
+        .mega-dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .mega-dropdown .dropdown-menu h6 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 0.75rem;
+            border-bottom: 5px solid #000000;
+            padding-bottom: 5px;
+        }
+
+        .mega-dropdown .dropdown-item {
+            padding: 0.35rem 0;
+            font-size: 0.95rem;
+            transition: color 0.2s ease, background-color 0.2s ease, text-decoration 0.2s ease;
+            text-decoration: none;
+        }
+
+        .mega-dropdown .dropdown-item:hover {
+            color: #000;
+            background-color: #ffe4a0; /* soft highlight */
+            text-decoration: underline;
+        }
+    }
+
+    /* Mobile Mega Menu */
+    @media (max-width: 991.98px) {
+        .mega-dropdown .dropdown-menu {
+            padding: 1rem 1rem 0 1rem;
+            background-color: #FFDE59;
+            border: none;
+        }
+
+        .mega-dropdown .dropdown-menu .col-lg-3 {
+            margin-bottom: 0.4rem; /* reduced gap */
+        }
+
+        .mega-dropdown h6 {
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .mega-dropdown .dropdown-item {
+            font-size: 0.9rem;
+            padding-left: 0.25rem;
+            transition: color 0.2s ease, background-color 0.2s ease, text-decoration 0.2s ease;
+            text-decoration: none;
+        }
+
+        .mega-dropdown .dropdown-item:hover {
+            background-color: #ffe4a0; /* same soft highlight on mobile */
+            text-decoration: underline;
+            color: #000;
+        }
+    }
+</style>
+
+</head>
+
+<!-- Topbar Start -->
+<div class="container-fluid bg-primary text-white d-none d-lg-flex">
+    <div class="container py-3">
+        <div class="d-flex align-items-center">
+            <a href="/">
+                <img class="LogoMain" src="/img/TaskNectar-svg.svg">
+            </a>
+            <div class="ms-auto d-flex align-items-center">
+                <small class="ms-4"><i class="fa fa-envelope me-3"></i>
+                    <a style="color:#000000;text-decoration: underline;" href="mailto:info@tasknectar.com">info@tasknectar.com</a>
+                </small>
+                <div class="ms-auto d-none d-lg-block">
+                    <a href="/#tools" class="btn btn-primary rounded-pill py-2 px-3">Get Started</a>
                 </div>
+                <form action="https://www.paypal.com/donate" method="post" target="_blank">
+                    <input type="hidden" name="hosted_button_id" value="3JGJEECLSHVY2" />
+                    <input type="submit" value="Buy us a Coffee" class="btn btn-primary"
+                        style="background:#597AFF; color: #fff !important; border:solid; border-radius:25px; padding:10px 20px; margin-left: 1rem;" />
+                </form>
             </div>
         </div>
     </div>
-    <!-- Topbar End -->
-     <!-- Navbar Start -->
-    <div class="container-fluid bg-white sticky-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg bg-white navbar-light p-lg-0">
-                <!-- Flex row for mobile logo and toggle -->
-                <div class="d-flex justify-content-between align-items-center w-100 d-lg-none">
-                <a href="/" class="navbar-brand"><img class="LogoMain" src="/img/TaskNectar-svg.svg" alt="TaskNectar Logo"></a>
-                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span class="navbar-toggler-icon"></span></button>
-    </div>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <div class="navbar-nav">
-                        <a href="/index.html" class="nav-item nav-link">Home</a>
-                        <a href="/about/" class="nav-item nav-link">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Our Tools</a>
-                            <div class="dropdown-menu bg-light rounded-0 rounded-bottom m-0">
-                                <a href="/all-tools/" class="dropdown-item">View All Tools</a>
-                                <a href="/invoice-generator/" class="dropdown-item">Invoice Generator</a>
-                                <a href="/inventory-stock-counter/" class="dropdown-item">Inventory Stock Counter</a>
-                                <a href="/quote-estimator/" class="dropdown-item">Quote/Estimates Generator</a>
-                                <a href="/roi-calculator/" class="dropdown-item">ROI Calculator</a>
-                                <a href="/printable-calendar/" class="dropdown-item">Printable Calendar</a>
-                                <a href="/pdf-merger/" class="dropdown-item">PDF Merger</a>
-                                <a href="/pdf-splitter/" class="dropdown-item">PDF Splitter</a>
-                                <a href="/fuel-cost-calculator/" class="dropdown-item">Fuel Cost Calculator</a>
-                                <a href="/mileage-reimbursement-calculator/" class="dropdown-item">Mileage Calculator</a>
-                                <a href="/percentage-calculator/" class="dropdown-item">Percentage Calculator</a>
-                                <a href="/decimal-time-calculator/" class="dropdown-item">Decimal to Time Calculator</a>
+</div>
+<!-- Topbar End -->
 
+<!-- Navbar Start -->
+<div class="container-fluid bg-white sticky-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light p-lg-0">
+            <div class="d-flex justify-content-between align-items-center w-100 d-lg-none">
+                <a href="/" class="navbar-brand">
+                    <img class="LogoMain" src="/img/TaskNectar-svg.svg" alt="TaskNectar Logo">
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav">
+                    <a href="/index.html" class="nav-item nav-link">Home</a>
+                    <a href="/about/" class="nav-item nav-link">About</a>
+
+                    <!-- Mega Menu Start -->
+                    <div class="nav-item dropdown mega-dropdown position-static">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Our Tools</a>
+                        <div class="dropdown-menu">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <h6>Business & Finance</h6>
+                                    <a href="/invoice-generator/" class="dropdown-item">Invoice Generator</a>
+                                    <a href="/quote-estimator/" class="dropdown-item">Quote/Estimates Generator</a>
+                                    <a href="/roi-calculator/" class="dropdown-item">ROI Calculator</a>
+                                    <a href="/percentage-calculator/" class="dropdown-item">Percentage Calculator</a>
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6>Inventory & Tracking</h6>
+                                    <a href="/inventory-stock-counter/" class="dropdown-item">Inventory Stock Counter</a>
+                                    <a href="/decimal-time-calculator/" class="dropdown-item">Decimal to Time Calculator</a>
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6>Travel & Mileage</h6>
+                                    <a href="/fuel-cost-calculator/" class="dropdown-item">Fuel Cost Calculator</a>
+                                    <a href="/mileage-reimbursement-calculator/" class="dropdown-item">Mileage Calculator</a>
+                                </div>
+                                <div class="col-lg-3">
+                                    <h6>PDF & Printables</h6>
+                                    <a href="/pdf-merger/" class="dropdown-item">PDF Merger</a>
+                                    <a href="/pdf-splitter/" class="dropdown-item">PDF Splitter</a>
+                                    <a href="/printable-calendar/" class="dropdown-item">Printable Calendar</a>
+                                    <a href="/all-tools/" class="dropdown-item text-primary fw-bold">View All Tools →</a>
+                                </div>
                             </div>
                         </div>
-                        <a href="/contact/" class="nav-item nav-link">Contact</a>
-                    </div>                   
+                    </div>
+                    <!-- Mega Menu End -->
+
+                    <a href="/contact/" class="nav-item nav-link">Contact</a>
                 </div>
-            </nav>
-        </div>
+            </div>
+        </nav>
     </div>
-    <!-- Navbar End -->
+</div>
+<!-- Navbar End -->
+
 <!-- PayPal Support Banner - Mobile Only -->
 <div class="container-fluid bg-primary text-center py-2 d-lg-none" style="background: #FFDE59!important;border-top: solid;border-width: 0.4rem;border-color: #000;">
-  <form action="https://www.paypal.com/donate" method="post" target="_blank">
-    <input type="hidden" name="hosted_button_id" value="3JGJEECLSHVY2" />
-    <input type="submit" value="Support TaskNectar" class="btn btn-primary"
-      style="background:#597AFF; color: #fff !important; border:solid; border-radius:25px; padding:10px 20px;" />
-  </form>
+    <form action="https://www.paypal.com/donate" method="post" target="_blank">
+        <input type="hidden" name="hosted_button_id" value="3JGJEECLSHVY2" />
+        <input type="submit" value="Support TaskNectar" class="btn btn-primary"
+            style="background:#597AFF; color: #fff !important; border:solid; border-radius:25px; padding:10px 20px;" />
+    </form>
 </div>
