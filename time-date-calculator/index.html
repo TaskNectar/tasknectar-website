@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-GYJSNCR46K');
+  </script>
+  <meta charset="utf-8">
+  <title>Time and Date Calculator | TaskNectar</title>
+  <meta name="title" content="Online Stopwatch | TaskNectar">
+  <meta name="description" content="Use TaskNectar’s free Time and Date Calculator to add or subtract years, months, weeks, and days from any date. Perfect for planning schedules, deadlines, or future events with ease.">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <!-- Favicon -->
+  <link href="/img/favicon.png" rel="icon">
+
+  <!-- Google Web Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Icon Font Stylesheet -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Customized Bootstrap Stylesheet -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Template Stylesheet -->
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Time and Date Calculator</h1>
+    <p>
+      Easily calculate future or past dates by adding or subtracting years, months, weeks, and days from any starting date. This flexible tool helps with planning deadlines, tracking schedules, or estimating time spans quickly and accurately.
+    </p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Perfect for planners, schedulers, and everyday use</h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Whether you're setting project timelines, figuring out important future dates, or simply curious about a date difference, this tool makes it easy. Enter a date, adjust the time span, and get results in both short and long date formats — all in seconds.
+  </p>
+</section>
+
+
+
+<div class="container py-5">
+  <h1 class="text-center mb-4" style="color: #000;">Time/Date Calculator</h1>
+
+  <div class="calculator-box mx-auto p-4" style="max-width: 600px; background: #fff8ec; border: 1px solid #ccc; border-radius: 15px;">
+    
+    <div class="row mb-3">
+      <div class="col-6">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input type="date" id="startDate" class="form-control" />
+      </div>
+      <div class="col-6">
+        <label for="operation" class="form-label">Operation</label>
+        <select id="operation" class="form-select">
+          <option value="add">Add</option>
+          <option value="subtract">Subtract</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-6 col-md-3 mb-2">
+        <label for="years" class="form-label">Years</label>
+        <input type="number" id="years" class="form-control" min="0" value="0" />
+      </div>
+      <div class="col-6 col-md-3 mb-2">
+        <label for="months" class="form-label">Months</label>
+        <input type="number" id="months" class="form-control" min="0" value="0" />
+      </div>
+      <div class="col-6 col-md-3 mb-2">
+        <label for="weeks" class="form-label">Weeks</label>
+        <input type="number" id="weeks" class="form-control" min="0" value="0" />
+      </div>
+      <div class="col-6 col-md-3 mb-2">
+        <label for="days" class="form-label">Days</label>
+        <input type="number" id="days" class="form-control" min="0" value="0" />
+      </div>
+    </div>
+
+<div class="d-flex gap-2 mb-3">
+  <button class="btn flex-fill" style="background-color: #EFB301; color: #000; border-radius: 999px;" onclick="calculateDate()">Calculate</button>
+  <button class="btn flex-fill" style="background-color: #ccc; color: #000; border-radius: 999px;" onclick="resetCalculator()">Reset</button>
+</div>
+
+    <div id="result" class="text-center fs-5 fw-bold mt-3"></div>
+  </div>
+</div>
+
+
+
+
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+
+  <!--Time/Date Calculator-->
+<script>
+  function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th'; // 11th–13th
+    switch (day % 10) {
+      case 1: return "st";
+      case 2: return "nd";
+      case 3: return "rd";
+      default: return "th";
+    }
+  }
+
+  function formatLongDate(date) {
+    const day = date.getDate();
+    const suffix = getOrdinalSuffix(day);
+    const month = date.toLocaleString("en-GB", { month: "long" });
+    const year = date.getFullYear();
+    return `${day}${suffix} ${month} ${year}`;
+  }
+
+  function calculateDate() {
+    const startDate = document.getElementById("startDate").value;
+    const operation = document.getElementById("operation").value;
+    const years = parseInt(document.getElementById("years").value, 10) || 0;
+    const months = parseInt(document.getElementById("months").value, 10) || 0;
+    const weeks = parseInt(document.getElementById("weeks").value, 10) || 0;
+    const days = parseInt(document.getElementById("days").value, 10) || 0;
+    const resultDiv = document.getElementById("result");
+
+    if (!startDate) {
+      resultDiv.textContent = "Please select a valid start date.";
+      return;
+    }
+
+    let date = new Date(startDate);
+    const factor = operation === "add" ? 1 : -1;
+
+    date.setFullYear(date.getFullYear() + factor * years);
+    date.setMonth(date.getMonth() + factor * months);
+    date.setDate(date.getDate() + factor * (days + weeks * 7));
+
+    const shortFormat = date.toLocaleDateString("en-GB", {
+      day: '2-digit', month: '2-digit', year: 'numeric'
+    });
+
+    const longFormat = formatLongDate(date);
+
+    resultDiv.innerHTML = `
+      <p>Result: <strong>${longFormat}</strong></p>
+      <p>Short Date: <strong>${shortFormat}</strong></p>
+    `;
+  }
+
+    function resetCalculator() {
+    document.getElementById("startDate").value = "";
+    document.getElementById("operation").value = "add";
+    document.getElementById("years").value = "0";
+    document.getElementById("months").value = "0";
+    document.getElementById("weeks").value = "0";
+    document.getElementById("days").value = "0";
+    document.getElementById("result").innerHTML = "";
+  }
+</script>
+
+
+
+
+</body>
+
+</html>
