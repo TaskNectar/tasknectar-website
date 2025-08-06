@@ -12,9 +12,9 @@
     gtag('config', 'G-GYJSNCR46K');
   </script>
   <meta charset="utf-8">
-  <title>Online Stopwatch | TaskNectar</title>
-  <meta name="title" content="Online Stopwatch | TaskNectar">
-  <meta name="description" content="Use TaskNectar’s free online stopwatch to track your time precisely. Start, stop, split (lap), and clear the stopwatch with ease—perfect for work, exercise, or any timing needs.">
+<title>Days Between Calculator | TaskNectar</title>
+<meta name="title" content="Days Between Calculator | TaskNectar">
+<meta name="description" content="Calculate the exact number of days between two dates quickly and easily with TaskNectar’s free Days Between Calculator. Perfect for planning projects, events, and deadlines.">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Favicon -->
@@ -133,45 +133,60 @@
 
 <section class="hero-content">
   <div class="hero-content-content">
-    <h1>Online Stopwatch</h1>
+    <h1>Days Between Dates Calculator</h1>
     <p>
-      Easily track elapsed time with this online Stopwatch. Use Start/Stop to control timing, Split to record lap times shown below, and Clear to reset. Perfect for workouts, tasks, or any activity that needs precise timing.
+      Quickly calculate the number of days between two dates with ease. Choose your start and end dates using the calendar inputs or quickly set today’s date with one click. Include the end date if needed, and get instant results—perfect for planning deadlines, trips, projects, and more.
     </p>
   </div>
 </section>
 
 <section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
-  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Ideal for work intervals, exercise laps, and more</h2>
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Plan with precision and confidence</h2>
   <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
-    Whether timing focused work sessions or tracking exercise laps, this Stopwatch helps you stay accurate and organized. Its clear display and lap table make it easy to see your progress at a glance.
+    Whether managing project timelines, calculating vacation days, or counting days until important events, this calculator delivers accurate day counts instantly. Its simple interface makes date math quick and hassle-free.
   </p>
 </section>
 
 
+<div class="container py-5">
+  <h1 class="text-center mb-4" style="color: #000;">Days Between Dates Calculator</h1>
 
-  <div class="countdown-wrapper">
-    <!-- Display -->
-    <div class="timer-display" id="timerDisplay">00:00:00</div>
+  <div class="calculator-box mx-auto p-4" style="max-width: 700px; background: #fff8ec; border: 1px solid #ccc; border-radius: 15px;">
 
-    <!-- Controls -->
-    <div class="control-row">
-      <button id="startStopBtn" onclick="toggleStopwatch()">Start</button>
-      <button id="splitBtn" onclick="recordSplit()" disabled>Split</button>
-      <button id="clearBtn" onclick="clearStopwatch()" disabled>Clear</button>
+    <!-- Dates Row -->
+    <div class="row mb-2">
+      <!-- Start Date -->
+      <div class="col-12 col-md-6 mb-3">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input type="date" id="startDate" class="form-control" />
+        <button class="btn btn-sm mt-2 w-100 w-md-auto" style="background-color: #EFB301; color: #000;" onclick="setToday('startDate')">Today</button>
+      </div>
+
+      <!-- End Date -->
+      <div class="col-12 col-md-6 mb-3">
+        <label for="endDate" class="form-label">End Date</label>
+        <input type="date" id="endDate" class="form-control" />
+        <button class="btn btn-sm mt-2 w-100 w-md-auto" style="background-color: #EFB301; color: #000;" onclick="setToday('endDate')">Today</button>
+      </div>
     </div>
 
-    <!-- Splits Table -->
-    <table id="splitsTable" style="display:none;">
-      <thead>
-        <tr>
-          <th>Split #</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody id="splitsBody">
-      </tbody>
-    </table>
+    <!-- Checkbox -->
+    <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" id="includeEndDate">
+      <label class="form-check-label" for="includeEndDate">Include end date in calculation</label>
+    </div>
+
+    <!-- Buttons -->
+    <div class="d-flex flex-column flex-md-row gap-2 mb-3">
+      <button class="btn flex-fill" style="background-color: #EFB301; color: #000; border-radius: 999px;" onclick="calculateDays()">Calculate</button>
+      <button class="btn flex-fill" style="background-color: #ccc; color: #000; border-radius: 999px;" onclick="resetDaysCalculator()">Reset</button>
+    </div>
+
+    <!-- Result -->
+    <div id="daysResult" class="text-center fs-5 fw-bold mt-3"></div>
   </div>
+</div>
+
 <section class="related-tool-callout">
   <h2>Related Tool</h2>
   <p>Need to add or subtract years, months, weeks, or days from a specific date? Try our <a href="/time-date-calculator/">Time/Date Calculator</a> to quickly calculate new dates with ease. Perfect for planning deadlines, reminders, and scheduling tasks accurately.</p>
@@ -200,93 +215,44 @@
       el.innerHTML = html;
     });
   </script>
-
-  <!-- Stopwatch JS -->
   <script>
-    let elapsedSeconds = 0;
-    let stopwatchInterval = null;
-    let isRunning = false;
-    let splitCount = 0;
+  function setToday(inputId) {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById(inputId).value = today;
+  }
 
-    function formatTime(seconds) {
-      const h = String(Math.floor(seconds / 3600)).padStart(2, '0');
-      const m = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
-      const s = String(seconds % 60).padStart(2, '0');
-      return `${h}:${m}:${s}`;
+  function calculateDays() {
+    const startInput = document.getElementById("startDate").value;
+    const endInput = document.getElementById("endDate").value;
+    const includeEnd = document.getElementById("includeEndDate").checked;
+    const resultDiv = document.getElementById("daysResult");
+
+    if (!startInput || !endInput) {
+      resultDiv.textContent = "Please select both start and end dates.";
+      return;
     }
 
-    function updateDisplay() {
-      document.getElementById("timerDisplay").textContent = formatTime(elapsedSeconds);
-    }
+    const startDate = new Date(startInput);
+    const endDate = new Date(endInput);
 
-    function toggleStopwatch() {
-      const startStopBtn = document.getElementById("startStopBtn");
-      const splitBtn = document.getElementById("splitBtn");
-      const clearBtn = document.getElementById("clearBtn");
+    // Clear time to avoid timezone issues
+    startDate.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
 
-      if (isRunning) {
-        // Stop
-        clearInterval(stopwatchInterval);
-        isRunning = false;
-        startStopBtn.textContent = "Start";
-        splitBtn.disabled = true;
-      } else {
-        // Start
-        isRunning = true;
-        startStopBtn.textContent = "Stop";
-        splitBtn.disabled = false;
-        clearBtn.disabled = false;
+    let diff = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+    if (includeEnd && diff >= 0) diff += 1;
 
-        stopwatchInterval = setInterval(() => {
-          elapsedSeconds++;
-          updateDisplay();
-        }, 1000);
-      }
-    }
+    resultDiv.textContent = `\Days Between: ${Math.abs(diff)} day${Math.abs(diff) !== 1 ? 's' : ''}`;
+  }
 
-    function recordSplit() {
-      splitCount++;
-      const splitsTable = document.getElementById("splitsTable");
-      const splitsBody = document.getElementById("splitsBody");
+  function resetDaysCalculator() {
+    document.getElementById("startDate").value = "";
+    document.getElementById("endDate").value = "";
+    document.getElementById("includeEndDate").checked = false;
+    document.getElementById("daysResult").innerHTML = "";
+  }
+</script>
 
-      if (splitsTable.style.display === "none") {
-        splitsTable.style.display = "table";
-      }
-
-      const tr = document.createElement("tr");
-      const tdNum = document.createElement("td");
-      const tdTime = document.createElement("td");
-
-      tdNum.textContent = splitCount;
-      tdTime.textContent = formatTime(elapsedSeconds);
-
-      tr.appendChild(tdNum);
-      tr.appendChild(tdTime);
-
-      splitsBody.appendChild(tr);
-    }
-
-    function clearStopwatch() {
-      clearInterval(stopwatchInterval);
-      isRunning = false;
-      elapsedSeconds = 0;
-      splitCount = 0;
-      updateDisplay();
-
-      // Reset buttons
-      document.getElementById("startStopBtn").textContent = "Start";
-      document.getElementById("splitBtn").disabled = true;
-      document.getElementById("clearBtn").disabled = true;
-
-      // Clear splits table
-      const splitsBody = document.getElementById("splitsBody");
-      splitsBody.innerHTML = "";
-      document.getElementById("splitsTable").style.display = "none";
-    }
-
-    // Initialize display on page load
-    updateDisplay();
-  </script>
 </body>
 
 </html>
