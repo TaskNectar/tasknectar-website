@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GYJSNCR46K');
+</script>
+    <meta charset="utf-8">
+<title>Word Counter | Count Words and Characters | TaskNectar</title>
+<meta name="title" content="Word Counter Tool | Count Words and Characters | TaskNectar">
+<meta name="description" content="Quickly count words and characters with TaskNectar’s free Word Counter tool. Easily track text length in real time — perfect for writers, students, marketers, and content creators.">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+    <style>
+.char-counter-section {
+    max-width: 60%;
+    margin: 40px auto;
+    background: #f3f3f3;
+    padding: 20px 25px;
+    border-radius: 12px;
+    border: solid;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #000;
+    text-align: center;
+}
+
+.char-counter-section h1 {
+  margin-bottom: 18px;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+textarea#textInput {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1.1rem;
+  border: 3px solid #000;
+  border-radius: 8px;
+  resize: vertical;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+  font-family: inherit;
+}
+
+textarea#textInput:focus {
+  border-color: #EFB301;
+  outline: none;
+}
+
+.counter-container {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #000;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+button#clearBtn {
+  margin-top: 15px;
+  background-color: #EFB301;
+  border: none;
+  color: #000;
+  font-weight: 700;
+  padding: 10px 30px;
+  font-size: 1rem;
+  border-radius: 9999px; /* pill shape */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+button#clearBtn:hover {
+  background-color: #d49c00;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+  .char-counter-section {
+    max-width: 95%;
+    padding: 15px 15px;
+  }
+
+  .char-counter-section h1 {
+    font-size: 1.5rem;
+    margin-bottom: 14px;
+  }
+
+  textarea#textInput {
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+
+  .counter-container {
+    font-size: 1rem;
+    white-space: normal; /* allow wrap on small screens */
+    justify-content: center;
+  }
+
+  button#clearBtn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    width: 100%;
+  }
+}
+
+    </style>
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Word Counter</h1>
+    <p>Quickly count the number of words and characters in any text. Just paste or type your content, and get instant, accurate counts to help you meet word limits, improve writing, or analyze text length.</p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Easily Track Words and Characters for Writing, Editing, and Content Creation</h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Whether you're drafting an article, composing an email, or creating social media posts, knowing your text’s length is crucial. TaskNectar’s Word Counter tool gives you real-time feedback on both word and character counts, helping you stay within limits and craft better content.
+  </p>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Use it to ensure your writing fits requirements, optimize SEO keywords, or simply monitor your progress. The tool is ideal for writers, students, marketers, and anyone who works with text daily.
+  </p>
+</section>
+
+
+<section class="char-counter-section">
+  <h3>Begin Typing to Count Words and Characters</h3>
+  <textarea id="textInput" placeholder="Type or paste your text here..." rows="6"></textarea>
+  
+  <div class="counter-container">
+    <span id="charCount">0</span> characters • 
+    <span id="wordCount">0</span> words
+  </div>
+  
+  <!-- Dropdown for WPM selection -->
+  <div style="margin: 12px 0; font-weight: 600;">
+    <label for="wpmSelect" style="margin-right: 8px;">Select speaking rate:</label>
+    <select id="wpmSelect" style="font-size:1rem; padding:4px 8px; border-radius:6px; border: 1.5px solid #000;">
+      <option value="100">Presentations (100 wpm)</option>
+      <option value="135" selected>Conversational (135 wpm)</option>
+      <option value="155">Audiobooks (155 wpm)</option>
+      <option value="155">Radio & Podcasts (155 wpm)</option>
+      <option value="250">Auctioneers (250 wpm)</option>
+      <option value="325">Commentators (325 wpm)</option>
+    </select>
+  </div>
+
+  <div style="font-weight: 600; margin-bottom: 10px;">
+    Estimated reading time (HH:MM:SS): <span id="readingTime">0</span> min
+  </div>
+  
+  <button id="clearBtn">Clear</button>
+</section>
+
+
+<script>
+const textInput = document.getElementById('textInput');
+const charCount = document.getElementById('charCount');
+const wordCount = document.getElementById('wordCount');
+const readingTime = document.getElementById('readingTime');
+const clearBtn = document.getElementById('clearBtn');
+const wpmSelect = document.getElementById('wpmSelect');
+
+function countWords(text) {
+  return text.trim().split(/\s+/).filter(word => word.length > 0).length;
+}
+
+function formatTime(seconds) {
+  const hrs = Math.floor(seconds / 3600);
+  const mins = Math.floor((seconds % 3600) / 60);
+  const secs = Math.floor(seconds % 60);
+  // Pad with zeros to always show 2 digits
+  return [hrs, mins, secs]
+    .map(unit => unit.toString().padStart(2, '0'))
+    .join(':');
+}
+
+function updateCounts() {
+  const text = textInput.value;
+  const length = text.length;
+  const words = countWords(text);
+  const wpm = parseInt(wpmSelect.value, 10) || 135; // default conversational
+
+  charCount.textContent = length;
+  wordCount.textContent = words;
+
+  if (words === 0) {
+    readingTime.textContent = '00:00:00';
+    return;
+  }
+
+  // Calculate total seconds reading time
+  const totalSeconds = (words / wpm) * 60;
+
+  readingTime.textContent = formatTime(totalSeconds);
+}
+
+textInput.addEventListener('input', updateCounts);
+wpmSelect.addEventListener('change', updateCounts);
+
+clearBtn.addEventListener('click', () => {
+  textInput.value = '';
+  charCount.textContent = 0;
+  wordCount.textContent = 0;
+  readingTime.textContent = '00:00:00';
+  wpmSelect.value = '135'; // reset to default conversational
+  textInput.focus();
+});
+</script>
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+</body>
+
+</html>
