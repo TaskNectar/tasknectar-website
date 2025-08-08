@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GYJSNCR46K');
+</script>
+    <meta charset="utf-8">
+<title>Business Card Generator | Design & Download Your Card | TaskNectar</title>
+<meta name="title" content="Business Card Generator | Design & Download Your Card | TaskNectar">
+<meta name="description" content="Create professional business cards quickly with TaskNectar’s free Business Card Generator. Upload your logo, customize contact details and colors, then download a print-ready PDF.">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+    <style>
+/* Container layout for the generator */
+.card-generator {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+/* Input form styling */
+.card-generator form {
+  flex: 1 1 350px;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+ /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+}
+
+.card-generator form label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.card-generator form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.card-generator #download-btn {
+  background: #EFB301;
+  color: #000;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* Generator content wrapper */
+.card-generator .generator-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Preview section styling */
+.card-generator .preview-wrapper {
+  flex: 1 1 350px;
+  max-width: 400px;
+}
+
+.card-generator .card {
+  display: flex;
+  flex-direction: row; /* Ensure horizontal layout */
+  align-items: center;
+  justify-content: flex-start;
+  width: 350px;
+  height: 200px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  padding: 1rem;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+/* LEFT SIDE: Logo */
+.card-generator .card-logo {
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  overflow: hidden;
+  background: #eee;
+  flex-shrink: 0;
+}
+
+.card-generator .card-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* RIGHT SIDE: Info */
+.card-generator .card-info {
+  flex: 1;
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.card-generator .card-info h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1rem;
+}
+
+.card-generator .card-info p {
+  margin: 0.1rem 0;
+  word-break: break-word;
+}
+
+/* Mobile layout: stack vertically */
+@media (max-width: 768px) {
+  .card-generator {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-generator .generator-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card-generator form,
+  .card-generator .preview-wrapper {
+    width: 100%;
+    max-width: 500px;
+    flex: 1 1 35px;
+  }
+
+  .card-generator .card {
+    width: 100%;
+  }
+}
+.card {
+  max-height: 54mm;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+    </style>
+
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Business Card Generator</h1>
+    <p>Create professional and personalized business cards quickly and easily. Upload your logo, enter your contact details, and customize the colors to design a card that represents your brand perfectly.</p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Design Your Perfect Business Card with TaskNectar</h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Whether you're a freelancer, entrepreneur, or part of a growing business, a professional business card is essential for making a great first impression. TaskNectar’s Business Card Generator allows you to customize your card with your name, job title, contact details, website, and logo — all from one easy-to-use tool.
+  </p>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Upload your logo and the tool automatically preserves its aspect ratio, whether it’s square or rectangular. Choose background and text colors that match your brand identity. Once you’re happy with the design, download a high-quality PDF ready for printing or digital sharing.
+  </p>
+</section>
+<div class="card-generator">
+  <div class="container">
+    <div class="generator-content">
+      <!-- Preview on the left -->
+      <div class="preview-wrapper">
+        <h2>Preview</h2>
+        <div id="card-preview">
+          <div class="card">
+            <div class="card-logo" id="preview-logo"></div>
+            <div class="card-info">
+              <h3 id="preview-name">John Doe</h3>
+              <p id="preview-title">Marketing Manager</p>
+              <p id="preview-email">john@example.com</p>
+              <p id="preview-phone">+44 1234 567890</p>
+              <p id="preview-website">www.company.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form on the right -->
+      <form id="card-form">
+       <div style="position: relative; display: flex; align-items: center; gap: 10px;">
+          <label>Background Colour:</label>
+            <div id="color-swatch" style="width: 30px; height: 30px; border: 1px solid #ccc; cursor: pointer; background-color: #ffffff;"></div>
+              <input type="color" id="bg-color-picker"
+                style="position: absolute; left: 50px; top: 0; opacity: 0; width: 30px; height: 30px; cursor: pointer;">
+            </div>
+            
+<!-- Add this inside your form, near the background color picker -->
+<div style="position: relative; display: flex; align-items: center; gap: 10px; margin-top: 1rem;">
+  <label>Text Colour:</label>
+  <div id="text-color-swatch"
+       style="width: 30px; height: 30px; border: 1px solid #ccc; cursor: pointer; background-color: #000000;"></div>
+  <input type="color" id="text-color-picker"
+         style="position: absolute; left: 50px; top: 0; opacity: 0; width: 30px; height: 30px; cursor: pointer;">
+</div>
+
+
+
+        <label>Upload Logo:
+          <input type="file" id="logo-upload" accept="image/*">
+        </label>
+
+        <label>Full Name:
+          <input type="text" id="full-name" placeholder="John Doe">
+        </label>
+
+        <label>Job Title:
+          <input type="text" id="job-title" placeholder="Marketing Manager">
+        </label>
+
+        <label>Email:
+          <input type="email" id="email" placeholder="john@example.com">
+        </label>
+
+        <label>Phone:
+          <input type="text" id="phone" placeholder="+44 1234 567890">
+        </label>
+
+        <label>Website:
+          <input type="text" id="website" placeholder="www.company.com">
+        </label>
+
+        <!-- Address field is kept but no longer used in the card -->
+        <label>Address:
+          <input type="text" id="address" placeholder="123 Business Street, London">
+        </label>
+
+        <button type="button" id="download-btn">Download as PDF</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+
+<script>
+// Update preview content
+function updatePreview() {
+  document.getElementById('preview-name').textContent =
+    document.getElementById('full-name').value || 'John Doe';
+
+  document.getElementById('preview-title').textContent =
+    document.getElementById('job-title').value || 'Marketing Manager';
+
+  document.getElementById('preview-phone').textContent =
+    document.getElementById('phone').value || '+44 1234 567890';
+
+  document.getElementById('preview-email').textContent =
+    document.getElementById('email').value || 'john@example.com';
+
+  document.getElementById('preview-website').textContent =
+    document.getElementById('website').value || 'www.company.com';
+}
+
+// Logo upload handler
+document.getElementById('logo-upload').addEventListener('change', function (e) {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const img = document.createElement('img');
+      img.src = event.target.result;
+      img.alt = 'Logo';
+      img.style.maxWidth = '100%';
+      img.style.height = 'auto';
+      img.style.objectFit = 'contain';
+
+      const logoContainer = document.getElementById('preview-logo');
+      logoContainer.innerHTML = '';
+      logoContainer.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  }
+});
+
+// Update preview on input changes
+['full-name', 'job-title', 'phone', 'email', 'website'].forEach(id => {
+  document.getElementById(id).addEventListener('input', updatePreview);
+});
+
+// Color swatch & color picker interaction
+const colorSwatch = document.getElementById('color-swatch');
+const colorPicker = document.getElementById('bg-color-picker');
+
+colorSwatch.addEventListener('click', () => {
+  colorPicker.click();
+});
+
+colorPicker.addEventListener('input', function (e) {
+  const newColor = e.target.value || '#ffffff'; // Default to white
+  colorSwatch.style.backgroundColor = newColor;
+  document.querySelector('#card-preview .card').style.backgroundColor = newColor;
+});
+
+// Text Picker Colour
+const textColorSwatch = document.getElementById('text-color-swatch');
+const textColorPicker = document.getElementById('text-color-picker');
+
+textColorSwatch.addEventListener('click', () => {
+  textColorPicker.click();
+});
+
+textColorPicker.addEventListener('input', function (e) {
+  const newColor = e.target.value || '#000000'; // Default black
+  textColorSwatch.style.backgroundColor = newColor;
+
+  // Change text color of all card info paragraphs
+  document.querySelectorAll('#card-preview .card-info p').forEach(p => {
+    p.style.color = newColor;
+  });
+
+  // Also change text color of the name heading explicitly
+  document.getElementById('preview-name').style.color = newColor;
+});
+
+// PDF export button handler
+document.getElementById('download-btn').addEventListener('click', () => {
+  const original = document.querySelector('.card');
+  const clone = original.cloneNode(true);
+
+  // Use selected colour or white if none picked
+  const selectedColor = document.getElementById('bg-color-picker').value || '#ffffff';
+
+  // Standard business card size in pixels (approx 85mm x 55mm)
+  const cardWidth = 320;  // px
+  const cardHeight = 204; // px
+
+  // Force exact dimensions and styling for PDF export
+  clone.style.width = cardWidth + 'px';
+  clone.style.height = cardHeight + 'px';
+  clone.style.padding = '0';
+  clone.style.margin = '0';
+  clone.style.overflow = 'hidden';
+  clone.style.boxSizing = 'border-box';
+  clone.style.backgroundColor = selectedColor;
+  clone.style.display = 'flex';
+  clone.style.flexDirection = 'row';
+  clone.style.alignItems = 'center';
+  clone.style.justifyContent = 'space-between';
+  clone.style.border = 'none';
+  clone.style.boxShadow = 'none';
+  clone.style.borderRadius = '0';
+
+  // Style info section
+  const info = clone.querySelector('.card-info');
+  if (info) {
+    info.style.fontSize = '9pt';
+    info.style.margin = '0';
+    info.style.padding = '0 30px 0 0';
+    info.style.boxSizing = 'border-box';
+  }
+
+  // Style logo image
+  const logoImg = clone.querySelector('.card-logo img');
+  if (logoImg) {
+    logoImg.style.width = '120px';  // adjusted for smaller card
+    logoImg.style.height = 'auto';
+    logoImg.style.objectFit = 'contain';
+    logoImg.style.display = 'block';
+  }
+
+  // Create offscreen container for PDF capture
+  const container = document.createElement('div');
+  container.style.position = 'fixed';
+  container.style.top = '-10000px';
+  container.style.left = '-10000px';
+  container.style.width = cardWidth + 'px';
+  container.style.height = cardHeight + 'px';
+  container.style.padding = '0';
+  container.style.margin = '0';
+  container.style.background = selectedColor;
+  container.appendChild(clone);
+  document.body.appendChild(container);
+
+  // html2pdf options
+  const opt = {
+    margin: 0,
+    filename: 'business-card.pdf',
+    image: { type: 'jpeg', quality: 1 },
+    html2canvas: {
+      scale: 8,
+      scrollX: 0,
+      scrollY: 0,
+      width: cardWidth,
+      height: cardHeight,
+      useCORS: true
+    },
+    jsPDF: {
+      unit: 'px',
+      format: [cardWidth, cardHeight],
+      orientation: 'landscape'
+    }
+  };
+
+  // Generate and save PDF, then remove offscreen container
+  html2pdf().set(opt).from(clone).save().then(() => {
+    document.body.removeChild(container);
+  });
+});
+</script>
+
+
+
+</body>
+</html>
