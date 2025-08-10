@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GYJSNCR46K');
+</script>
+    <meta charset="utf-8">
+<title>Blog | TaskNectar</title>
+<meta name="title" content="Fuel Cost Calculator | Plan Your Journey Expenses | TaskNectar">
+<meta name="description" content="Use TaskNectar’s free Fuel Cost Calculator to estimate travel expenses based on distance, fuel efficiency, and fuel price. Supports MPG, L/100km, and multiple currencies.">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="" name="keywords">
+<meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/blog/css/blog.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div data-include="/header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>TaskNectar Blog: Smart Tips for Your Small Business</h1>
+    <p>Stay ahead with easy guides on invoicing, budgeting, and running your business smoother than ever.</p>
+  </div>
+</section>
+<div id="posts-list" class="posts-grid"></div>
+<div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+
+  <!--Blog Post Grid-->
+  <script>
+  async function loadPosts() {
+  try {
+    const response = await fetch('/blog/posts.json');
+    if (!response.ok) throw new Error('Failed to load posts.json');
+    const posts = await response.json();
+
+    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    const container = document.getElementById('posts-list');
+    container.innerHTML = '';
+
+    posts.forEach(post => {
+      const postDate = new Date(post.date);
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const formattedDate = postDate.toLocaleDateString(undefined, options);
+
+      const postHTML = `
+        <article class="blog-card">
+          <h2><a href="${post.url}">${post.title}</a></h2>
+          <time datetime="${post.date}">${formattedDate}</time>
+          <p>${post.excerpt}</p>
+          <a href="${post.url}" class="read-more-btn">Read More</a>
+        </article>
+      `;
+
+      container.insertAdjacentHTML('beforeend', postHTML);
+    });
+  } catch (error) {
+    console.error('Error loading posts:', error);
+    document.getElementById('posts-list').innerHTML = '<p>Sorry, unable to load posts at this time.</p>';
+  }
+}
+
+loadPosts();
+</script>
+
+</body>
+
+</html>

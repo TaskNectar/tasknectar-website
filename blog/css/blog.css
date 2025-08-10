@@ -1,0 +1,259 @@
+/* Basic Reset for blog content */
+.blog-post {
+  max-width: 900px;      /* limits the width */
+  margin: 2rem auto;     /* top/bottom margin 2rem, left/right auto (centers the container) */
+  padding: 0 1rem;       /* horizontal padding */
+  font-family: 'Roboto', sans-serif;
+  color: #222;
+  line-height: 1.6;
+  font-size: 18px;
+  background: #fff;
+  text-align: left;      /* explicitly align text to left */
+}
+
+/* Headings */
+.blog-post h1,
+.blog-post h2,
+.blog-post h3,
+.blog-post h4 {
+  color: #333;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.blog-post h1 {
+  font-size: 2.8rem;
+  margin-top: 0;
+}
+
+.blog-post h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid #ffc170;
+  padding-bottom: 0.3rem;
+}
+
+.blog-post h3 {
+  font-size: 1.6rem;
+}
+
+/* Paragraphs */
+.blog-post p {
+  margin-bottom: 1.3rem;
+  color: #000000;
+  font-weight: 300!important;
+}
+
+/* Links */
+.blog-post a {
+  color: #007bff; /* changed to blue */
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.blog-post a:hover,
+.blog-post a:focus {
+  border-bottom-color: #007bff;
+  color: #0056b3;
+  outline: none;
+}
+
+/* Lists */
+.blog-post ul,
+.blog-post ol {
+  margin: 1rem 0 1rem 1.5rem;
+  color: #444;
+}
+
+.blog-post li {
+  margin-bottom: 0.5rem;
+  color: #000000;
+}
+
+/* Images */
+.blog-post img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Blockquotes */
+.blog-post blockquote {
+  margin: 2rem 0;
+  padding-left: 1.2rem;
+  border-left: 4px solid #ffc170;
+  color: #666;
+  font-style: italic;
+  background: #fff8e1;
+}
+
+/* Code blocks and inline code */
+.blog-post pre {
+  background: #f5f5f5;
+  padding: 1rem;
+  overflow-x: auto;
+  border-radius: 4px;
+  margin: 2rem 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.blog-post code {
+  background: #f5f5f5;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95rem;
+}
+
+/* Anchor link nav (summary section) */
+.blog-post .summary {
+  background: #fff3cd;
+  border: 1px solid #ffeeba;
+  padding: 1rem 1.2rem;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.blog-post .summary ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.blog-post .summary a {
+  color: #d39e00;
+  text-decoration: none;
+}
+
+.blog-post .summary a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .blog-post {
+    padding: 0 1rem;
+    font-size: 16px;
+  }
+
+  .blog-post h1 {
+    font-size: 2.2rem;
+  }
+
+  .blog-post h2 {
+    font-size: 1.6rem;
+  }
+}
+
+
+/*Blog posts page*/
+
+.blog-summary h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.3rem;
+}
+
+.blog-summary time {
+  display: block;
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 0.7rem;
+}
+
+.blog-summary p {
+  margin-bottom: 0.8rem;
+  color: #555;
+}
+
+.blog-summary a.read-more {
+  color: #eeb302;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.blog-summary a.read-more:hover {
+  text-decoration: underline;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 2rem 0;
+}
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1080px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.blog-card {
+  border: 2px solid #000;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.blog-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-card h2 a {
+  color: #000;
+  text-decoration: none;
+}
+
+.blog-card h2 a:hover {
+  text-decoration: underline;
+}
+
+.blog-card time {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.blog-card p {
+  flex-grow: 1;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.read-more-btn {
+  display: inline-block;
+  background-color: #FFC107;
+  color: #000;
+  padding: 0.6rem 1.2rem;
+  border-radius: 9999px; /* fully rounded pill shape */
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  align-self: flex-start;
+}
+
+.read-more-btn:hover,
+.read-more-btn:focus {
+  background-color: #edb100;
+  outline: none;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  .posts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
