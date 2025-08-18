@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GYJSNCR46K');
+</script>
+    <meta charset="utf-8">
+<title>Subscription Tracker | TaskNectar</title>
+<meta name="title" content="Subscription Tracker | Manage & Analyze Subscriptions | TaskNectar">
+<meta name="description" content="Track and manage all your recurring expenses with TaskNectar’s free Subscription Tracker. See monthly and yearly totals, upcoming billing dates, and spending breakdowns with easy-to-read charts. Perfect for individuals, families, and businesses.">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+<style>
+.chart-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#subscriptionChart {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Heading styling */
+.card-body h2.h5 {
+  font-weight: bold;
+  color: #000;
+}
+
+/* Card spacing and polish */
+.card.shadow-sm.my-4 {
+  border: 5px solid #000;
+  border-radius: 20px;
+}
+
+/* --- Mobile Table Styling --- */
+@media (max-width: 768px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .table thead {
+    display: none; /* hide headers on mobile */
+  }
+
+  .table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    border: 1px solid #ffc170;
+    border-radius: 12px;
+    padding: 0.5rem;
+    background: #fff3d6;
+  }
+
+  .table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.3rem 0.6rem;
+    border: none;
+  }
+
+  .table tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #000;
+    width: 45%;
+  }
+
+  /* Optional: hide less important columns */
+  .sub-monthly,
+  .sub-annual,
+  .sub-notes {
+    display: none;
+  }
+}
+</style>
+
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Subscription Tracker</h1>
+    <p>Stay in control of your recurring expenses. Track, manage, and analyze your subscriptions with ease using TaskNectar’s Subscription Tracker.</p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Take Control of Your Subscription Spending</h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    From streaming services and cloud storage to business software and entertainment apps, monthly subscriptions can quickly add up. TaskNectar’s Subscription Tracker helps you stay organized by showing exactly how much you’re spending each month and year.
+  </p>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Easily log your subscriptions, categorize them, and see a clear breakdown of costs with automatic totals. Spot upcoming billing dates, avoid unwanted surprises, and use our visual pie chart to understand where your money goes. Perfect for individuals, families, and businesses who want to manage their recurring costs smarter.
+  </p>
+</section>
+
+<body>
+  <main class="container my-5">
+    <!-- Controls Row -->
+    <section class="row g-3 align-items-end mb-4">
+      <div class="col-12 col-md-3">
+        <label for="currency" class="form-label">Currency</label>
+        <select id="currency" class="form-select" aria-label="Currency selector">
+          <option value="£" selected>£ (GBP)</option>
+          <option value="$">$ (USD)</option>
+          <option value="€">€ (EUR)</option>
+          <option value="₹">₹ (INR)</option>
+          <option value="A$">A$ (AUD)</option>
+          <option value="C$">C$ (CAD)</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-9 text-md-end">
+        <button id="exportCsvBtn" class="btn me-2"
+          style="background:#EFB301;border:5px solid #000;border-radius:9999px;">Download CSV</button>
+        <button id="clearAllBtn" class="btn"
+          style="background:#EFB301;border:5px solid #000;border-radius:9999px;">Clear All</button>
+      </div>
+    </section>
+
+    <!-- Add Subscription Form -->
+    <section class="card shadow-sm mb-4">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Add a Subscription</h2>
+        <form id="subscriptionForm" class="row g-3">
+          <div class="col-12 col-md-4">
+            <label for="subName" class="form-label">Name</label>
+            <input id="subName" type="text" class="form-control" placeholder="e.g., Adobe Creative Cloud, Netflix, Canva, etc" required>
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label for="subCost" class="form-label">Cost</label>
+            <input id="subCost" type="number" min="0" step="0.01" class="form-control" placeholder="0.00" required>
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label for="subCycle" class="form-label">Billing Cycle</label>
+            <select id="subCycle" class="form-select" required>
+              <option value="monthly" selected>Monthly</option>
+              <option value="yearly">Yearly</option>
+              <option value="weekly">Weekly</option>
+              <option value="quarterly">Quarterly</option>
+              <option value="biannual">Biannual</option>
+            </select>
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label for="nextBillingDate" class="form-label">Next Billing Date</label>
+            <input id="nextBillingDate" type="date" class="form-control">
+          </div>
+
+          <div class="col-6 col-md-2">
+            <label for="category" class="form-label">Category</label>
+            <select id="category" class="form-select">
+              <option value="" selected>—</option>
+              <option>Entertainment</option>
+              <option>Software</option>
+              <option>Marketing</option>
+              <option>Utilities</option>
+              <option>Finance</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <label for="subNotes" class="form-label">Notes (optional)</label>
+            <input id="subNotes" type="text" class="form-control" placeholder="Account email, plan, etc.">
+          </div>
+
+          <div class="col-12 text-end">
+            <button type="submit" id="addSubBtn" class="btn"
+              style="background:#EFB301;border:5px solid #000;border-radius:9999px;">Add Subscription</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Summary Cards -->
+    <section class="row g-3 mb-4">
+      <div class="col-12 col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6 text-muted mb-1">Monthly Total</h3>
+            <div class="display-6 fw-bold" id="monthlyTotal">£0.00</div>
+            <small class="text-muted" id="monthlyCount">0 subscriptions</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6 text-muted mb-1">Annual Total</h3>
+            <div class="display-6 fw-bold" id="annualTotal">£0.00</div>
+            <small class="text-muted">Converted from all cycles</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="card shadow-sm h-100">
+          <div class="card-body">
+            <h3 class="h6 text-muted mb-1">Due in Next 30 Days</h3>
+            <div class="display-6 fw-bold" id="dueSoonTotal">£0.00</div>
+            <small class="text-muted" id="dueSoonCount">0 upcoming charges</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="row g-3 align-items-end mb-3">
+      <div class="col-12 col-md-4">
+        <label for="filterCategory" class="form-label">Filter by Category</label>
+        <select id="filterCategory" class="form-select">
+          <option value="" selected>All</option>
+          <option>Entertainment</option>
+          <option>Software</option>
+          <option>Marketing</option>
+          <option>Utilities</option>
+          <option>Finance</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="col-12 col-md-4">
+        <label for="searchInput" class="form-label">Search</label>
+        <input id="searchInput" type="search" class="form-control" placeholder="Search by name or notes…">
+      </div>
+      <div class="col-12 col-md-4 text-md-end">
+        <button id="resetFiltersBtn" class="btn"
+          style="background:#EFB301;border:5px solid #000;border-radius:9999px;">Reset Filters</button>
+      </div>
+    </section>
+
+    <!-- Table -->
+    <section class="card shadow-sm">
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0" id="subscriptionsTable">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col" class="text-end">Cost</th>
+                <th scope="col">Cycle</th>
+                <th scope="col">Next Billing</th>
+                <th scope="col">Category</th>
+                <th scope="col">Notes</th>
+                <th scope="col" class="text-end">Monthly Eq.</th>
+                <th scope="col" class="text-end">Annual Eq.</th>
+                <th scope="col" class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="subscriptionsTbody">
+              <!-- Rows injected here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+<!-- Chart -->
+<section class="card shadow-sm my-4">
+  <div class="card-body text-center">
+    <h2 class="h5 mb-3">Spending by Category</h2>
+    <div class="chart-container">
+      <canvas id="subscriptionChart"></canvas>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Row Template (for JS) -->
+    <template id="subscription-row-template">
+      <tr data-id="">
+        <td class="sub-name"></td>
+        <td class="sub-cost text-end"></td>
+        <td class="sub-cycle"></td>
+        <td class="sub-next-date"></td>
+        <td class="sub-category"></td>
+        <td class="sub-notes"></td>
+        <td class="sub-monthly text-end"></td>
+        <td class="sub-annual text-end"></td>
+        <td class="text-end">
+          <button class="btn btn-sm me-2 editSubBtn"
+            style="background:#EFB301;border:3px solid #000;border-radius:9999px;">Edit</button>
+          <button class="btn btn-sm deleteSubBtn"
+            style="background:#EFB301;border:3px solid #000;border-radius:9999px;">Delete</button>
+        </td>
+      </tr>
+    </template>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="editForm">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editModalLabel">Edit Subscription</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input type="hidden" id="editId">
+              <div class="mb-3">
+                <label for="editName" class="form-label">Name</label>
+                <input id="editName" type="text" class="form-control" required>
+              </div>
+              <div class="row g-3">
+                <div class="col-6">
+                  <label for="editCost" class="form-label">Cost</label>
+                  <input id="editCost" type="number" min="0" step="0.01" class="form-control" required>
+                </div>
+                <div class="col-6">
+                  <label for="editCycle" class="form-label">Cycle</label>
+                  <select id="editCycle" class="form-select" required>
+                    <option value="monthly">Monthly</option>
+                    <option value="yearly">Yearly</option>
+                    <option value="weekly">Weekly</option>
+                    <option value="quarterly">Quarterly</option>
+                    <option value="biannual">Biannual</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row g-3 mt-1">
+                <div class="col-6">
+                  <label for="editNextDate" class="form-label">Next Billing</label>
+                  <input id="editNextDate" type="date" class="form-control">
+                </div>
+                <div class="col-6">
+                  <label for="editCategory" class="form-label">Category</label>
+                  <select id="editCategory" class="form-select">
+                    <option value="">—</option>
+                    <option>Entertainment</option>
+                    <option>Software</option>
+                    <option>Marketing</option>
+                    <option>Utilities</option>
+                    <option>Finance</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="mt-3">
+                <label for="editNotes" class="form-label">Notes</label>
+                <input id="editNotes" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn" data-bs-dismiss="modal"
+                style="background:#EFB301;border:5px solid #000;border-radius:9999px;">Cancel</button>
+              <button type="submit" class="btn"
+                style="background:#EFB301;border:5px solid #000;border-radius:9999px;">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Import JSON (hidden file input) -->
+    <input type="file" id="importFileInput" accept="application/json" hidden>
+  </main>
+</body>
+
+<section class="related-tool-callout">
+  <h2>Related Tool</h2>
+  <p>Ready to analyze the success of your investments? Our <a href="/roi-calculator/">ROI Calculator</a> helps you determine the return on your projects and expenditures.</p>
+</section>
+
+
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("subscriptionForm");
+    const tbody = document.getElementById("subscriptionsTbody");
+    const template = document.getElementById("subscription-row-template");
+    const monthlyTotalEl = document.getElementById("monthlyTotal");
+    const annualTotalEl = document.getElementById("annualTotal");
+    const dueSoonTotalEl = document.getElementById("dueSoonTotal");
+    const dueSoonCountEl = document.getElementById("dueSoonCount");
+    const monthlyCountEl = document.getElementById("monthlyCount");
+    const currencySelect = document.getElementById("currency");
+    const searchInput = document.getElementById("searchInput");
+    const filterCategory = document.getElementById("filterCategory");
+
+    let subscriptions = [];
+    let chart; // global Chart.js instance
+
+    /* --- Utilities --- */
+    const currency = () => currencySelect.value || "£";
+
+    const monthlyEquivalent = (cost, cycle) => {
+        switch(cycle){
+            case "weekly": return cost * 52 / 12;
+            case "monthly": return cost;
+            case "quarterly": return cost / 3;
+            case "biannual": return cost / 6;
+            case "yearly": return cost / 12;
+            default: return cost;
+        }
+    };
+
+    const annualEquivalent = (cost, cycle) => {
+        switch(cycle){
+            case "weekly": return cost * 52;
+            case "monthly": return cost * 12;
+            case "quarterly": return cost * 4;
+            case "biannual": return cost * 2;
+            case "yearly": return cost;
+            default: return cost * 12;
+        }
+    };
+
+    const formatCurrency = (val) => currency() + parseFloat(val).toFixed(2);
+
+    const formatDate = (input) => {
+        if (!input) return "—";
+        const date = new Date(input);
+        if (isNaN(date)) return input; // fallback if invalid
+        const day = String(date.getDate()).padStart(2, "0");
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+    };
+
+    const updateTotals = () => {
+        let monthlySum = 0, annualSum = 0, dueSoonSum = 0, dueSoonCount = 0;
+        const now = new Date();
+        const in30Days = new Date(now);
+        in30Days.setDate(now.getDate() + 30);
+
+        subscriptions.forEach(sub => {
+            const monthEq = monthlyEquivalent(sub.cost, sub.cycle);
+            const yearEq = annualEquivalent(sub.cost, sub.cycle);
+            monthlySum += monthEq;
+            annualSum += yearEq;
+
+            if(sub.nextBillingDate){
+                const nextDate = new Date(sub.nextBillingDate);
+                if(nextDate >= now && nextDate <= in30Days){
+                    dueSoonSum += monthEq;
+                    dueSoonCount++;
+                }
+            }
+        });
+
+        monthlyTotalEl.textContent = formatCurrency(monthlySum);
+        annualTotalEl.textContent = formatCurrency(annualSum);
+        dueSoonTotalEl.textContent = formatCurrency(dueSoonSum);
+        dueSoonCountEl.textContent = dueSoonCount + " upcoming charges";
+        monthlyCountEl.textContent = subscriptions.length + " subscriptions";
+    };
+
+    /* --- Chart --- */
+    function updateChart() {
+        const canvas = document.getElementById('subscriptionChart');
+        if (!canvas) return;
+
+        const categoryTotals = {};
+        subscriptions.forEach(sub => {
+            const cat = sub.category || 'Other';
+            const cost = parseFloat(sub.cost) || 0;
+            if (!categoryTotals[cat]) categoryTotals[cat] = 0;
+            categoryTotals[cat] += cost;
+        });
+
+        const labels = Object.keys(categoryTotals);
+        const data = Object.values(categoryTotals);
+
+        const ctx = canvas.getContext('2d');
+
+        if (chart) chart.destroy();
+
+        chart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: [
+                        '#ffc170', // TaskNectar yellow
+                        '#000000', // black
+                        '#ff7f50', // coral
+                        '#87ceeb', // skyblue
+                        '#90ee90', // lightgreen
+                        '#d3d3d3', // light gray
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#000', font: { size: 14 } }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label}: ${currency()}${context.raw.toFixed(2)}`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    /* --- Table Rendering --- */
+    const renderTable = () => {
+        tbody.innerHTML = "";
+        const filterVal = filterCategory.value.toLowerCase();
+        const searchVal = searchInput.value.toLowerCase();
+
+        subscriptions.forEach((sub, index) => {
+            if(filterVal && sub.category.toLowerCase() !== filterVal) return;
+            if(searchVal && !sub.name.toLowerCase().includes(searchVal) && !sub.notes.toLowerCase().includes(searchVal)) return;
+
+            const clone = template.content.cloneNode(true);
+            const tr = clone.querySelector("tr");
+            tr.dataset.index = index;
+            tr.querySelector(".sub-name").textContent = sub.name;
+            tr.querySelector(".sub-cost").textContent = formatCurrency(sub.cost);
+            tr.querySelector(".sub-cycle").textContent = sub.cycle;
+            tr.querySelector(".sub-next-date").textContent = formatDate(sub.nextBillingDate);
+            tr.querySelector(".sub-category").textContent = sub.category || "—";
+            tr.querySelector(".sub-notes").textContent = sub.notes || "";
+            tr.querySelector(".sub-monthly").textContent = formatCurrency(monthlyEquivalent(sub.cost, sub.cycle));
+            tr.querySelector(".sub-annual").textContent = formatCurrency(annualEquivalent(sub.cost, sub.cycle));
+
+            tr.querySelector(".editSubBtn").addEventListener("click", () => editSubscription(index));
+            tr.querySelector(".deleteSubBtn").addEventListener("click", () => deleteSubscription(index));
+
+            tbody.appendChild(clone);
+        });
+
+        updateTotals();
+        updateChart();
+    };
+
+    /* --- CRUD --- */
+    const addSubscription = (sub) => {
+        subscriptions.push(sub);
+        renderTable();
+    };
+
+    const deleteSubscription = (index) => {
+        subscriptions.splice(index, 1);
+        renderTable();
+    };
+
+    const editSubscription = (index) => {
+        const sub = subscriptions[index];
+        const name = prompt("Edit Name", sub.name);
+        if(name === null) return;
+        const cost = parseFloat(prompt("Edit Cost", sub.cost));
+        if(isNaN(cost)) return;
+        const cycle = prompt("Edit Cycle (weekly/monthly/quarterly/biannual/yearly)", sub.cycle);
+        const nextBillingDate = prompt("Edit Next Billing Date (YYYY-MM-DD)", sub.nextBillingDate || "");
+        const category = prompt("Edit Category", sub.category || "");
+        const notes = prompt("Edit Notes", sub.notes || "");
+
+        subscriptions[index] = {name, cost, cycle, nextBillingDate, category, notes};
+        renderTable();
+    };
+
+    /* --- Event Listeners --- */
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+        const sub = {
+            name: document.getElementById("subName").value.trim(),
+            cost: parseFloat(document.getElementById("subCost").value),
+            cycle: document.getElementById("subCycle").value,
+            nextBillingDate: document.getElementById("nextBillingDate").value,
+            category: document.getElementById("category").value,
+            notes: document.getElementById("subNotes").value
+        };
+        addSubscription(sub);
+        form.reset();
+    });
+
+    currencySelect.addEventListener("change", renderTable);
+    searchInput.addEventListener("input", renderTable);
+    filterCategory.addEventListener("change", renderTable);
+
+    document.getElementById("clearAllBtn").addEventListener("click", () => {
+        if(confirm("Clear all subscriptions?")) {
+            subscriptions = [];
+            renderTable();
+        }
+    });
+
+    // Export JSON
+    document.getElementById("exportJsonBtn").addEventListener("click", () => {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(subscriptions));
+        const dlAnchor = document.createElement("a");
+        dlAnchor.setAttribute("href", dataStr);
+        dlAnchor.setAttribute("download", "subscriptions.json");
+        dlAnchor.click();
+    });
+
+    // Export CSV
+    document.getElementById("exportCsvBtn").addEventListener("click", () => {
+        if(!subscriptions.length) return;
+        const headers = ["Name","Cost","Cycle","Next Billing","Category","Notes"];
+        const rows = subscriptions.map(sub => [
+            sub.name, sub.cost, sub.cycle, sub.nextBillingDate, sub.category, sub.notes
+        ]);
+        let csv = headers.join(",") + "\n" + rows.map(r => r.map(v => `"${v}"`).join(",")).join("\n");
+        const dataStr = "data:text/csv;charset=utf-8," + encodeURIComponent(csv);
+        const dlAnchor = document.createElement("a");
+        dlAnchor.setAttribute("href", dataStr);
+        dlAnchor.setAttribute("download", "subscriptions.csv");
+        dlAnchor.click();
+    });
+
+    // Import JSON
+    document.getElementById("importJsonBtn").addEventListener("click", () => {
+        const input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".json";
+        input.onchange = e => {
+            const file = e.target.files[0];
+            if(!file) return;
+            const reader = new FileReader();
+            reader.onload = () => {
+                try {
+                    const imported = JSON.parse(reader.result);
+                    if(Array.isArray(imported)){
+                        subscriptions = imported;
+                        renderTable();
+                    }
+                } catch(err) {
+                    alert("Invalid JSON file.");
+                }
+            };
+            reader.readAsText(file);
+        };
+        input.click();
+    });
+
+    renderTable();
+});
+</script>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+</body>
+
+</html>
