@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GYJSNCR46K');
+</script>
+    <meta charset="utf-8">
+<title>Multi City Meeting Planner | TaskNectar</title>
+<meta name="title" content="Multi-City Meeting Planner | Schedule & Coordinate Meetings | TaskNectar">
+<meta name="description" content="Plan multi-city meetings with TaskNectar’s free planner. Add locations, set dates, coordinate attendees, and streamline scheduling across cities.">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+<link rel="canonical" href="https://tasknectar.com/multi-city-meeting-planner/" />
+
+    <!-- Favicon -->
+    <link href="/img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">  
+  <style>
+    :root {
+      --bg: #f9fafb;
+      --card-bg: #fff;
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --hover-bg: #e5e7eb;
+      --good: #bbf7d0;
+      --ok: #fde68a;
+      --bad: #fecaca;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.05);
+      --progress-bg: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+
+    body {
+       background: var(--bg);
+      color: #111827;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      display: flex;
+      justify-content: space-between;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+    }
+    .progress-step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      color: #6b7280;
+      cursor: pointer;
+    }
+    .progress-step:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 12px;
+      right: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--progress-bg);
+      transform: translateX(50%);
+      z-index: 0;
+    }
+    .step-circle {
+      width: 24px;
+      height: 24px;
+      line-height: 24px;
+      border-radius: 50%;
+      background: var(--progress-bg);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      margin-bottom: 4px;
+    }
+    .step-label {
+      font-size: 0.85rem;
+      text-align: center;
+      margin-top: 2px;
+    }
+    .progress-step.active .step-circle,
+    .progress-step.completed .step-circle {
+      background: var(--primary);
+    }
+    .progress-step.active .step-label,
+    .progress-step.completed .step-label {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Card */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      max-width: 900px;
+      margin: 0 auto 2rem;
+    }
+    h1 {
+      margin: 0 0 1rem;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    button, select, input[type="date"] {
+      font: inherit;
+      padding: 0.6rem 0.8rem;
+      border-radius: var(--radius);
+      border: 1px solid #d1d5db;
+      background: white;
+    }
+    button {
+      background: var(--primary);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    button:hover {
+      background: var(--primary-light);
+    }
+    .actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .hidden { display: none; }
+
+    /* STEP 1 */
+    .step1-fields {
+      display: grid;
+      gap: 1rem;
+    }
+    #cityContainer .city-row {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .remove {
+      background: none;
+      border: none;
+      color: #ef4444;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+    .step1-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+    #addCity {
+      border: 2px dashed var(--primary);
+      background: transparent;
+      color: var(--primary);
+    }
+    #addCity:hover {
+      background: var(--primary-light);
+      color: white;
+      border-color: var(--primary-light);
+    }
+
+    /* STEP 2 */
+    .step2-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .step2-header button {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .step2-header select {
+      width: 140px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+    th {
+      background: #f3f4f6;
+      padding: 0.75rem;
+      font-weight: 500;
+      text-align: center;
+    }
+    td {
+      padding: 0.6rem;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    /* UTC hover & pointer */
+    td:first-child {
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    td:first-child:hover {
+      background: var(--hover-bg);
+      text-decoration: underline;
+    }
+    td.good { background: var(--good); }
+    td.ok   { background: var(--ok); }
+    td.bad  { background: var(--bad); }
+    td sup {
+      font-size: 0.7em;
+      vertical-align: super;
+      margin-left: 2px;
+      color: #6b7280;
+    }
+
+    /* STEP 3 */
+    .step3-header {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 1rem;
+    }
+    .step3-header button {
+      background: transparent;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-right: 1rem;
+    }
+
+    /* ------------------------------------------------------------------
+   RESPONSIVE / MOBILE STYLES
+   Apply at screens 600px wide or less
+------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  /* 1. Global adjustments */
+  body {
+    padding: 1rem;
+  }
+  .card {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  /* 2. Progress bar: wrap & shrink */
+  .progress-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .progress-step {
+    flex: 1 1 30%;
+    min-width: 90px;
+    margin-bottom: 0;
+  }
+  .step-circle {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 2px;
+  }
+  .step-label {
+    font-size: 0.75rem;
+  }
+
+  /* 3. STEP 1 form: stack fields */
+  .step1-fields {
+    display: block;
+  }
+  #cityContainer .city-row {
+    grid-template-columns: 1fr auto;
+    margin-bottom: 0.5rem;
+  }
+  .step1-fields > div,
+  #cityContainer,
+  #addCity {
+    width: 100%;
+  }
+  .step1-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  #addCity,
+  #toStep2 {
+    width: 100%;
+  }
+
+  /* 4. STEP 2 header & table */
+  .step2-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .step2-header select {
+    width: 100%;
+  }
+  .step2-header button {
+    align-self: flex-start;
+  }
+  /* make table horizontally scrollable */
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  table th, table td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* 5. STEP 2 & STEP 3 actions: full-width */
+  .actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .actions button {
+    width: 100%;
+  }
+
+  /* 6. STEP 3 header */
+  .step3-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+}
+/* ------------------------------------------------------------------
+   RESPONSIVE / MOBILE STYLES
+   Apply at screens 600px wide or less
+------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  /* 1. Global adjustments */
+  body {
+    padding: 1rem;
+  }
+  .card {
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+
+  /* 2. Progress bar: wrap & shrink */
+  .progress-container {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .progress-step {
+    flex: 1 1 30%;
+    min-width: 90px;
+    margin-bottom: 0;
+  }
+  .step-circle {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 2px;
+  }
+  .step-label {
+    font-size: 0.75rem;
+  }
+
+  /* 3. STEP 1 form: stack fields */
+  .step1-fields {
+    display: block;
+  }
+  #cityContainer .city-row {
+    grid-template-columns: 1fr auto;
+    margin-bottom: 0.5rem;
+  }
+  .step1-fields > div,
+  #cityContainer,
+  #addCity {
+    width: 100%;
+  }
+  .step1-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  #addCity,
+  #toStep2 {
+    width: 100%;
+  }
+
+  /* 4. STEP 2 header & table */
+  .step2-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+  .step2-header select {
+    width: 100%;
+  }
+  .step2-header button {
+    align-self: flex-start;
+  }
+  /* make table horizontally scrollable */
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  table th, table td {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  /* 5. STEP 2 & STEP 3 actions: full-width */
+  .actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .actions button {
+    width: 100%;
+  }
+
+  /* 6. STEP 3 header */
+  .step3-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  /* Center the date picker */
+  .step1-fields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  /* Make the date input sit in the middle */
+  #meetingDate {
+    width: 80%;
+    max-width: 300px;
+  }
+
+  /* Stack location rows below, full width */
+  #cityContainer {
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  /* Each location row is a no‐wrap flex row */
+  #cityContainer .city-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  /* Label stays its own size, no wrap */
+  #cityContainer .city-row label {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  /* Select grows, but will shrink to fit */
+  #cityContainer .city-row select {
+    flex: 1 1 auto;
+    min-width: 0;
+    margin: 0 0.5rem;
+  }
+  /* Remove button fixed size */
+  #cityContainer .city-row .remove {
+    flex: 0 0 auto;
+  }
+
+  /* Place “Add Location” and “Continue” on the same line */
+  .step1-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+  }
+  .step1-actions button {
+    flex: 1 1 auto;
+  }
+}
+  </style>
+</head>
+<body>
+  <div data-include="/header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Multi-City Meeting Planner</h1>
+    <p>Easily organize meetings across multiple cities. Add locations, set dates, and coordinate participants—all in one streamlined interface.</p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">
+    Seamless Scheduling for Regional and Global Teams
+  </h2>
+
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Whether you’re planning a local workshop, a cross-country tour, or an international conference, our planner lets you manage each city’s schedule in real time.
+  </p>
+
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Streamline venue selection, align participant availability, and lock in dates with confidence. Ideal for event organizers, managers, and anyone coordinating multi-location meetings.
+  </p>
+</section>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-step" data-step="1">
+      <div class="step-circle">1</div>
+      <div class="step-label">Pick Date & Locations</div>
+    </div>
+    <div class="progress-step" data-step="2">
+      <div class="step-circle">2</div>
+      <div class="step-label">Find a Time</div>
+    </div>
+    <div class="progress-step" data-step="3">
+      <div class="step-circle">3</div>
+      <div class="step-label">Show Details</div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div id="step1" class="card">
+    <h1>Step 1: Pick Date & Locations</h1>
+    <div class="step1-fields">
+      <div>
+        <label for="meetingDate">Meeting Date</label><br>
+        <input type="date" id="meetingDate"/>
+      </div>
+      <div id="cityContainer"></div>
+    </div>
+    <div class="step1-actions">
+      <button id="addCity">+ Add Location</button>
+      <button id="toStep2">Continue →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" class="card hidden">
+    <div class="step2-header">
+      <button id="backTo1Top">← Previous Step</button>
+      <div>
+        <label for="intervalSelect">Interval</label>
+        <select id="intervalSelect">
+          <option value="60">Hourly</option>
+          <option value="30" selected>30 Minutes</option>
+          <option value="15">15 Minutes</option>
+        </select>
+      </div>
+    </div>
+    <h1>Step 2: Find a Time</h1>
+    <table>
+      <thead>
+        <tr id="header-row"><th>UTC Time</th></tr>
+      </thead>
+      <tbody id="planner-body"></tbody>
+    </table>
+    <div class="actions">
+      <button id="backTo1">← Back</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" class="card hidden">
+    <div class="step3-header">
+      <button id="backTo2Top">← Previous Step</button>
+    </div>
+    <h1>Step 3: Show Details</h1>
+    <p id="selectedTime"></p>
+    <div class="actions">
+      <button id="addCalendar">Add to Calendar (.ics)</button>
+      <button id="shareTime">Share Times</button>
+      <button id="backTo2">← Back to Table</button>
+    </div>
+  </div>
+
+  <script>
+    // — State & Config —
+    const tzList = Intl.supportedValuesOf('timeZone');
+    const MAX_LOCATIONS = 11;
+    const GOOD_START = 8, GOOD_END = 20;
+    let locationCount = 0,
+        chosenCities = [],
+        meetingDate = null,
+        selectedInterval = 30,
+        currentStep = 1;
+
+    // — Helpers —
+    function populateSelect(sel) {
+  tzList.forEach(tz => {
+    // Split into [continent, ..., cityPart]
+    const [continent, ...parts] = tz.split('/');
+    // Grab the last segment as the city name, replace underscores
+    const city = parts[parts.length - 1].replace(/_/g, ' ');
+    const option = document.createElement('option');
+    option.value = tz;
+    option.textContent = `${city} - ${continent}`;
+    sel.appendChild(option);
+  });
+}
+
+
+    function getIntervals() {
+      const arr = [];
+      for (let m = 0; m < 60; m += selectedInterval) {
+        arr.push(m);
+      }
+      return arr;
+    }
+
+    // — Progress & Navigation —
+    function updateProgress(step) {
+      document.querySelectorAll('.progress-step').forEach(el => {
+        const s = +el.dataset.step;
+        el.classList.toggle('active', s === step);
+        el.classList.toggle('completed', s < step);
+      });
+      currentStep = step;
+    }
+
+    function showStep(step) {
+      [1,2,3].forEach(i =>
+        document.getElementById('step'+i)
+          .classList.toggle('hidden', i !== step)
+      );
+      updateProgress(step);
+    }
+
+    document.querySelectorAll('.progress-step').forEach(el => {
+      el.onclick = () => {
+        const s = +el.dataset-step;
+        if (s < currentStep) showStep(s);
+      };
+    });
+
+    // — Step 1: Locations & Date —
+    const cityContainer = document.getElementById('cityContainer');
+
+    function updateLabels() {
+      [...cityContainer.children].forEach((row, i) => {
+        row.querySelector('label').textContent = `Location ${i+1}:`;
+      });
+      locationCount = cityContainer.children.length;
+    }
+
+    function addLocationRow() {
+      if (locationCount >= MAX_LOCATIONS) return;
+      locationCount++;
+      const row = document.createElement('div');
+      row.className = 'city-row';
+      const lbl = document.createElement('label');
+      lbl.textContent = `Location ${locationCount}:`;
+      row.appendChild(lbl);
+
+      const sel = document.createElement('select');
+      sel.className = 'city-select';
+      sel.style.width = '100%';
+      populateSelect(sel);
+      row.appendChild(sel);
+
+      const rem = document.createElement('button');
+      rem.className = 'remove';
+      rem.innerHTML = '×';
+      rem.title = 'Remove';
+      rem.onclick = () => {
+        row.remove();
+        updateLabels();
+      };
+      row.appendChild(rem);
+
+      cityContainer.appendChild(row);
+    }
+
+    document.getElementById('addCity').onclick = addLocationRow;
+    addLocationRow(); // start with one
+
+    document.getElementById('toStep2').onclick = () => {
+      meetingDate = document.getElementById('meetingDate').value;
+      if (!meetingDate) {
+        alert('Please pick a date.');
+        return;
+      }
+      const vals = [...document.querySelectorAll('.city-select')]
+                    .map(s => s.value)
+                    .filter(v => v);
+      if (!vals.length) {
+        alert('Select at least one location.');
+        return;
+      }
+      chosenCities = vals.map(tz => ({
+        name: tz.replace(/_/g,' '),
+        tz
+      }));
+      buildTable();
+      showStep(2);
+    };
+
+    // — Step 2: Table & Interval —
+    document.getElementById('backTo1Top').onclick =
+    document.getElementById('backTo1').onclick = () => showStep(1);
+
+    document.getElementById('intervalSelect').onchange = e => {
+      selectedInterval = +e.target.value;
+      buildTable();
+    };
+
+    function buildTable() {
+      // Header
+      const hdr = document.getElementById('header-row');
+      hdr.innerHTML = '<th>UTC Time</th>';
+      chosenCities.forEach(c => {
+        const th = document.createElement('th');
+        th.textContent = c.name;
+        hdr.appendChild(th);
+      });
+
+      // Start at current UTC rounded down
+      const now = new Date();
+      const h = now.getUTCHours();
+      const m = now.getUTCMinutes();
+      const floored = Math.floor(m / selectedInterval) * selectedInterval;
+      const utcStart = Date.UTC(
+        now.getUTCFullYear(),
+        now.getUTCMonth(),
+        now.getUTCDate(),
+        h,
+        floored
+      );
+
+      // Rows for next 24h
+      const rowsCount = 24 * (60 / selectedInterval) | 0;
+      const body = document.getElementById('planner-body');
+      body.innerHTML = '';
+
+      for (let i = 0; i < rowsCount; i++) {
+        const ms = utcStart + i * selectedInterval * 60000;
+        const utc = new Date(ms);
+        const tr = document.createElement('tr');
+
+        // UTC cell
+        const td0 = document.createElement('td');
+        td0.textContent = utc.toISOString().substr(11,5);
+        td0.onclick = () => goToStep3(utc);
+        tr.appendChild(td0);
+
+        // Local cells
+        chosenCities.forEach(c => {
+          // Format with date to detect day offset
+          const fmt = new Intl.DateTimeFormat('en-CA', {
+            timeZone: c.tz,
+            year:'numeric', month:'2-digit', day:'2-digit',
+            hour:'2-digit', minute:'2-digit', hour12:false
+          });
+          const [ds, ts] = fmt.format(utc).split(', ');
+          const [ly,lm,ld] = ds.split('-').map(Number);
+          const [uy,um,ud] = [
+            utc.getUTCFullYear(),
+            utc.getUTCMonth()+1,
+            utc.getUTCDate()
+          ];
+          // compute offset days
+          const dateDiff = (new Date(ly,lm-1,ld) - new Date(uy,um-1,ud)) / 86400000;
+          const offset = Math.round(dateDiff);
+
+          // colour
+          const hr = +ts.split(':')[0];
+          let cls = 'bad';
+          if (hr >= GOOD_START && hr < GOOD_END) cls = 'good';
+          else if (hr >= GOOD_END && hr < GOOD_END + 2) cls = 'ok';
+
+          const td = document.createElement('td');
+          td.className = cls;
+          td.innerHTML = ts + (offset === 0 ? '' : `<sup>${offset>0?'+1':'-1'}</sup>`);
+          tr.appendChild(td);
+        });
+
+        body.appendChild(tr);
+      }
+    }
+
+    // — Step 3: Share & Calendar —
+    function goToStep3(utc) {
+      document.getElementById('selectedTime').textContent =
+        `Selected UTC time: ${utc.toISOString().substr(11,5)}`;
+      document.getElementById('addCalendar').onclick = () => exportICS(utc);
+      document.getElementById('shareTime').onclick   = () => shareTimes(utc);
+      showStep(3);
+    }
+    document.getElementById('backTo2').onclick =
+    document.getElementById('backTo2Top').onclick = () => showStep(2);
+
+    function exportICS(utc) {
+      const fmt = d => d.toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+      const ics = `BEGIN:VCALENDAR
+VERSION:2.0
+BEGIN:VEVENT
+DTSTART:${fmt(utc)}
+DTEND:${fmt(new Date(utc.getTime()+3600000))}
+SUMMARY:Meeting
+END:VEVENT
+END:VCALENDAR`;
+      const blob = new Blob([ics], {type:'text/calendar'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'meeting.ics'; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function shareTimes(utc) {
+  // Build lines for each location
+  const lines = chosenCities.map(c => {
+    const local = new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+      timeZone: c.tz
+    }).format(utc);
+    return `  • ${c.name}: ${local}`;
+  });
+
+  // Prepare subject and body
+  const subject = encodeURIComponent('Proposed Meeting Times');
+  const body = encodeURIComponent(
+    `Hi everyone,
+
+Please find below the proposed meeting time in UTC and your local time.  
+Let me know if you're unable to make it.
+
+UTC: ${utc.toISOString().substr(11,5)}
+${lines.join('\n')}
+
+Thanks,
+[Your Name]`
+  );
+
+  // Open mail client
+  window.location.href = `mailto:?subject=${subject}&body=${body}`;
+}
+
+    // — Init —
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('meetingDate').value =
+        new Date().toISOString().substr(0,10);
+      showStep(1);
+    });
+  </script>
+
+    <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+</body>
+</html>
