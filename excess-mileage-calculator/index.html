@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GYJSNCR46K');
+</script>
+    <meta charset="utf-8">
+<title>Fuel Cost Calculator | Plan Your Journey Expenses | TaskNectar</title>
+<meta name="title" content="Fuel Cost Calculator | Plan Your Journey Expenses | TaskNectar">
+<meta name="description" content="Use TaskNectar’s free Fuel Cost Calculator to estimate travel expenses based on distance, fuel efficiency, and fuel price. Supports MPG, L/100km, and multiple currencies.">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+<link rel="canonical" href="https://tasknectar.com/fuel-cost-calculator/" />
+
+    <!-- Favicon -->
+    <link href="/img/favicon.png" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+    <style>
+      .calculator-wrapper {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+      @media (max-width: 600px) {
+  .card {
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+}
+
+#contractButtons .btn.active {
+  background-color: #EFB301;
+  color: #000;
+  border-color: #000000;
+  border-width: 2px !important
+}
+
+#customContractLength {
+  transition: all 0.3s ease;
+}
+.btn-outline-dark{
+    border-width: 2px!important;
+}
+input#customContractLength{
+    width: 7rem!important;
+}
+
+#results .card {
+  border: 2px solid #EFB301;
+  border-radius: 1rem;
+  background: #fffceb;
+}
+#results .result-row {
+  font-size: 1.1rem;
+  margin: 0.5rem 0;
+}
+#results .total-charge {
+  font-size: 1.3rem;
+  color: #000;
+}
+
+    </style>
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Excess Mileage Calculator</h1>
+    <p>Quickly calculate potential excessive mileage charges on your car finance or leasing agreement. Enter your contract length, allowed miles, and expected mileage to see your estimated costs instantly.</p>
+  </div>
+</section>
+
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Plan Ahead and Avoid Extra Charges with TaskNectar's Excess Mileage Calculator</h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Whether you have a car on finance, a lease, or a hire purchase agreement, knowing your allowed mileage is essential. TaskNectar’s Excessive Mileage Calculator helps drivers, fleet managers, and leaseholders estimate potential extra costs before the end of their contract.
+  </p>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Simply enter your contract length, annual mileage allowance, total expected mileage, and your excess mileage charge per mile. The calculator instantly shows your total potential excess mileage cost in your preferred currency. It’s a simple, accurate way to avoid surprises and budget effectively for your car finance or leasing agreement.
+  </p>
+</section>
+  <div class="container my-5">
+    <div class="card p-4 shadow-sm">
+      <form id="mileageCalculator">
+<div class="mb-3">
+  <label class="form-label">Contract Length (months)</label>
+  <div id="contractButtons" class="d-flex flex-wrap gap-2 align-items-center">
+    <button type="button" class="btn btn-outline-dark contract-btn" data-value="12">12</button>
+    <button type="button" class="btn btn-outline-dark contract-btn" data-value="24">24</button>
+    <button type="button" class="btn btn-outline-dark contract-btn" data-value="36">36</button>
+    <button type="button" class="btn btn-outline-dark contract-btn" data-value="48">48</button>
+    <button type="button" class="btn btn-outline-dark contract-btn" data-value="60">60</button>
+    <div class="d-flex align-items-center">
+      <button type="button" class="btn btn-outline-dark contract-btn" data-value="other">Other</button>
+      <input type="number" id="customContractLength" class="form-control ms-2" 
+             placeholder="Months" style="display:none; width:100px;">
+    </div>
+  </div>
+</div>
+
+
+
+        <div class="mb-3">
+          <label for="milesPerYear" class="form-label">Allowed Miles Per Year</label>
+          <input type="number" id="milesPerYear" class="form-control" placeholder="e.g. 10000" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="actualMiles" class="form-label">Your Total Estimated Mileage</label>
+          <input type="number" id="actualMiles" class="form-control" placeholder="e.g. 35000" required>
+        </div>
+
+<div class="mb-3">
+  <label class="form-label">Excess Mileage Charge</label>
+  <div class="row g-2 align-items-center">
+    <div class="col-6 col-md-4">
+      <select id="currency" class="form-select">
+        <option value="£" selected>GBP (£)</option>
+        <option value="$">USD ($)</option>
+        <option value="€">EUR (€)</option>
+        <option value="A$">AUD (A$)</option>
+        <option value="C$">CAD (C$)</option>
+        <option value="NZ$">NZD (NZ$)</option>
+        <option value="₹">INR (₹)</option>
+        <option value="¥">JPY (¥)</option>
+        <option value="₩">KRW (₩)</option>
+        <option value="₺">TRY (₺)</option>
+        <option value="₽">RUB (₽)</option>
+        <option value="R$">BRL (R$)</option>
+        <option value="CHF">CHF (Swiss Franc)</option>
+        <option value="AED">AED (UAE Dirham)</option>
+        <option value="SAR">SAR (Saudi Riyal)</option>
+        <option value="ZAR">ZAR (South African Rand)</option>
+      </select>
+    </div>
+    <div class="col-6 col-md-8">
+      <input type="number" step="0.01" id="chargePerMile" class="form-control" placeholder="e.g. 0.12" required>
+    </div>
+  </div>
+</div>
+
+
+
+        <button type="button" id="calculateBtn" class="btn w-100" style="background:#EFB301; border-radius:999px;">
+          Calculate
+        </button>
+      </form>
+    </div>
+
+<div id="results" class="mt-4 text-center" style="display:none;">
+  <h3>Results</h3>
+  <p><strong>Total Allowed Mileage:</strong> <span id="allowedMileage"></span> miles</p>
+  <p><strong>Excess Mileage:</strong> <span id="excessMileage"></span> miles</p>
+  <p><strong>Total Charge:</strong> <span id="currencySymbol">£</span><span id="totalCharge"></span></p>
+</div>
+
+  </div>
+<section class="related-tool-callout">
+  <h2>Related Tool</h2>
+  <p>If you're calculating fuel costs for travel, you might also need our <a href="/mileage-reimbursement-calculator/">Mileage Reimbursement Calculator</a> — easily work out how much to claim or pay per mile based on company rates.</p>
+</section>
+
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+<script>
+let selectedContractLength = null;
+
+document.querySelectorAll(".contract-btn").forEach(btn => {
+  btn.addEventListener("click", function () {
+    document.querySelectorAll(".contract-btn").forEach(b => b.classList.remove("active"));
+    this.classList.add("active");
+
+    if (this.dataset.value === "other") {
+      document.getElementById("customContractLength").style.display = "block";
+      selectedContractLength = null;
+    } else {
+      document.getElementById("customContractLength").style.display = "none";
+      selectedContractLength = parseInt(this.dataset.value);
+    }
+  });
+});
+
+document.getElementById("calculateBtn").addEventListener("click", function () {
+  if (document.querySelector(".contract-btn.active")?.dataset.value === "other") {
+    selectedContractLength = parseInt(document.getElementById("customContractLength").value);
+  }
+
+  const milesPerYear = parseInt(document.getElementById("milesPerYear").value);
+  const actualMiles = parseInt(document.getElementById("actualMiles").value);
+  const chargePerMile = parseFloat(document.getElementById("chargePerMile").value);
+  const currencySymbol = document.getElementById("currency").value;
+
+  if (isNaN(selectedContractLength) || isNaN(milesPerYear) || isNaN(actualMiles) || isNaN(chargePerMile)) {
+    alert("Please fill in all fields with valid numbers.");
+    return;
+  }
+
+  const allowedMileage = (milesPerYear / 12) * selectedContractLength;
+  let excessMileage = actualMiles - allowedMileage;
+  if (excessMileage < 0) excessMileage = 0;
+
+  const totalCharge = (excessMileage * chargePerMile).toFixed(2);
+
+  document.getElementById("allowedMileage").textContent = allowedMileage.toLocaleString();
+  document.getElementById("excessMileage").textContent = excessMileage.toLocaleString();
+  document.getElementById("totalCharge").textContent = totalCharge;
+  document.getElementById("currencySymbol").textContent = currencySymbol;
+
+  document.getElementById("results").style.display = "block";
+});
+</script>
+
+
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Template Javascript -->
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+</body>
+
+
+
+</html>

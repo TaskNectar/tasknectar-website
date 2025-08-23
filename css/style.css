@@ -121,7 +121,9 @@
     background-color: #ffd98b; /* slightly lighter shade for hover */
     color: #000;
 }
-
+a.btn.btn-link {
+    font-size: 14px;
+}
 /******** END MY CUSTOM CSS ***********/
 
 /********** Template CSS **********/
@@ -722,7 +724,6 @@
 
 .footer .btn.btn-link:hover {
     color: var(--light);
-    letter-spacing: 1px;
     box-shadow: none;
 }
 
