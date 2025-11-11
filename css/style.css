@@ -44,7 +44,9 @@
   color: #000;
   padding: 40px 20px;
   text-align: center;
-  border-bottom: 5px solid #000;
+  border-top: 5px solid #000;
+  padding: 1em!important;
+  margin-bottom: 1em;
 }
 
 .hero-content-content {
