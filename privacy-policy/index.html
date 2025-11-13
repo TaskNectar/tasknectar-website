@@ -22,7 +22,7 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="canonical" href="https://www.tasknectar.com/privacy-policy" />
+  <link rel="canonical" href="https://www.tasknectar.com/privacy-policy/" />
 
   <!-- Favicon -->
   <link href="/img/favicon.png" rel="icon">
@@ -97,7 +97,7 @@
 
 <div data-include="/footer.html"></div>
 
-  <script>
+  <!--<script>
     // Helper to format currency
     function formatCurrency(value, symbol) {
       return symbol + value.toFixed(2);
@@ -220,8 +220,8 @@
         await html2pdf().set({ margin:10, filename:`Quote-${document.getElementById('quoteNumber').value||'Generated'}.pdf`, image:{type:'jpeg',quality:0.98}, html2canvas:{scale:2,useCORS:true}, jsPDF:{unit:'pt', format:'a4',orientation:'portrait'} }).from(previewContainer).save();
       });
     });
-  </script>
-  <script src="js/main.js"></script>
+  </script>-->
+  <!--<script src="js/main.js"></script>-->
   <script>document.addEventListener('DOMContentLoaded', () => {
   const includes = document.querySelectorAll('[data-include]');
   includes.forEach(async el => {
