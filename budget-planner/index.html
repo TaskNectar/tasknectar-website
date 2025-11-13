@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYJSNCR46K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-GYJSNCR46K');
+  </script>
+
+  <meta charset="utf-8">
+  <title>Budget Planner | TaskNectar</title>
+  <meta name="title" content="Budget Planner | TaskNectar">
+  <meta name="description" content="Track your monthly income, recurring bills, variable expenses, and savings goals using TaskNectar's budget planner.">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="canonical" href="https://tasknectar.com/budget-planner/" />
+
+  <link href="/img/favicon.png" rel="icon">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+
+<style>
+/* ===============================
+   TaskNectar Budget Planner Tool
+   Scoped styles (safe for embedding)
+   =============================== */
+
+.budget-tool {
+  --tn-bg: #ffc170;
+  --tn-text: #000000;
+  --tn-accent: #EFB301;
+  --tn-muted: rgba(0, 0, 0, 0.6);
+  --tn-card: #fff;
+  --tn-radius: 12px;
+  font-family: inherit;
+  color: var(--tn-text);
+  max-width: 1100px;       /* limit width */
+  margin: 0 auto;          /* center horizontally */
+  padding: 20px 16px;      /* breathing room */
+}
+
+/* Layout */
+.budget-tool .grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr; /* slightly wider input side */
+  gap: 20px;
+}
+
+.budget-tool .card {
+  background: var(--tn-card);
+  border-radius: var(--tn-radius);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 18px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Keep summary card visually lighter and pinned */
+.budget-tool .summary {
+  position: sticky;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Inputs and Buttons */
+.budget-tool input[type="number"],
+.budget-tool input[type="text"],
+.budget-tool select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  font: inherit;
+}
+
+.budget-tool .btn {
+  background: var(--tn-accent);
+  color: #000;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.06);
+  font-weight: 600;
+  transition: transform 0.1s ease;
+}
+
+.budget-tool .btn:hover {
+  transform: translateY(-1px);
+}
+
+.budget-tool .btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Tables */
+.budget-tool table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.budget-tool th,
+.budget-tool td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 14px;
+}
+
+.budget-tool th {
+  font-size: 13px;
+  color: var(--tn-muted);
+}
+
+.budget-tool .row-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.budget-tool .remove-row {
+  background: transparent;
+  border: none;
+  color: #c33;
+  cursor: pointer;
+}
+
+/* KPIs and Summary */
+.budget-tool .kpi {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.02), transparent);
+}
+
+.budget-tool .kpi .val {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.budget-tool .kpi .label {
+  font-size: 12px;
+  color: var(--tn-muted);
+}
+
+/* Progress Bar */
+.budget-tool .progress {
+  height: 12px;
+  background: rgba(0, 0, 0, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.budget-tool .progress > i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--tn-accent), #ffc66a);
+}
+
+/* Canvas */
+.budget-tool .canvas-wrap {
+  text-align: center;
+}
+
+.budget-tool canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Misc */
+.budget-tool .muted,
+.budget-tool .small-muted {
+  color: var(--tn-muted);
+  font-size: 13px;
+}
+
+.budget-tool .actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.budget-tool .inline {
+  display: flex;
+  gap: 8px;
+}
+
+.budget-tool .inline .field {
+  flex: 1;
+}
+
+.budget-tool .field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+/* -----------------------------------
+   Responsive & Mobile Adjustments
+   ----------------------------------- */
+
+/* Slightly narrower layout on very large screens */
+@media (min-width: 1400px) {
+  .budget-tool {
+    max-width: 1200px;
+  }
+}
+
+/* Tablet & mobile stacking */
+@media (max-width: 900px) {
+  .budget-tool .grid {
+    grid-template-columns: 1fr; /* stack vertically */
+  }
+
+  .budget-tool aside {
+    order: -1; /* show summary first */
+  }
+
+  .budget-tool table {
+    font-size: 0.9rem;
+  }
+
+  .budget-tool input[type="number"],
+  .budget-tool input[type="text"],
+  .budget-tool select {
+    width: 100%;
+  }
+
+  .budget-tool .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .budget-tool .actions .btn {
+    flex: 1 1 45%;
+  }
+
+  .budget-tool .canvas-wrap canvas {
+    width: 100%;
+    height: auto;
+  }
+
+  .budget-tool h3 {
+    font-size: 1rem;
+    margin-top: 16px;
+  }
+
+  .budget-tool .inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .budget-tool .btn.ghost {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Phones and small devices */
+@media (max-width: 500px) {
+  .budget-tool {
+    padding: 12px;
+  }
+
+  .budget-tool table th,
+  .budget-tool table td {
+    padding: 4px;
+  }
+
+  .budget-tool .kpi .val {
+    font-size: 1rem;
+  }
+
+  .budget-tool .btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .budget-tool .card {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  }
+}
+</style>
+
+</head>
+
+<body>
+  <div data-include="/header.html"></div>
+
+<section class="hero-content">
+  <div class="hero-content-content">
+    <h1>Budget Planner</h1>
+    <p>Take control of your finances with our easy-to-use Budget Planner. Track your monthly income, recurring bills, variable expenses, and savings goals in one place. Add additional income from side hustles or partners, and instantly see your leftover funds and spending percentages.</p>
+  </div>
+</section>
+
+  <!-- Budget Planner Start -->
+<div class="budget-tool">
+  <div class="grid">
+    <!-- Left: Inputs -->
+    <div>
+      <div class="card">
+        <!-- Currency + Income -->
+        <div class="field">
+          <label class="small">Currency</label>
+          <select id="currency">
+            <option value="£">£ Pound (GBP)</option>
+            <option value="$">$ Dollar (USD)</option>
+            <option value="€">€ Euro (EUR)</option>
+            <option value="¥">¥ Yen (JPY)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label class="small">Monthly Net Income (after tax)</label>
+          <input id="income" type="number" min="0" step="0.01" value="2500" />
+        </div>
+        <div class="field">
+          <label for="additionalIncome">Additional Income</label>
+          <input type="number" id="additionalIncome" placeholder="e.g. 800">
+          <small class="small-muted">E.g. Partner's income, side hustle, any other earnings, etc.</small>
+        </div>
+        <!-- Recurring Expenses -->
+        <h3 style="margin-top:8px">Recurring monthly expenses</h3>
+        <div id="recurring-wrapper">
+          <table id="recurring-table">
+            <thead>
+              <tr><th>Item</th><th>Amount</th><th></th></tr>
+            </thead>
+            <tbody id="recurring-body">
+              <tr>
+                <td><input class="name" type="text" value="Rent / Mortgage" /></td>
+                <td><input class="amount" type="number" min="0" step="0.01" value="900" /></td>
+                <td class="row-controls"><button class="remove-row" title="remove">✕</button></td>
+              </tr>
+              <tr>
+                <td><input class="name" type="text" value="Utilities" /></td>
+                <td><input class="amount" type="number" min="0" step="0.01" value="150" /></td>
+                <td class="row-controls"><button class="remove-row" title="remove">✕</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:8px">
+            <button id="add-recurring" class="btn">+ Add recurring expense</button>
+          </div>
+        </div>
+
+        <!-- Variable Expenses -->
+        <h3 style="margin-top:12px">Variable monthly expenses</h3>
+        <div id="variable-wrapper">
+          <table id="variable-table">
+            <thead>
+              <tr><th>Item</th><th>Amount</th><th></th></tr>
+            </thead>
+            <tbody id="variable-body">
+              <tr>
+                <td><input class="name" type="text" value="Groceries" /></td>
+                <td><input class="amount" type="number" min="0" step="0.01" value="200" /></td>
+                <td class="row-controls"><button class="remove-row" title="remove">✕</button></td>
+              </tr>
+              <tr>
+                <td><input class="name" type="text" value="Transport" /></td>
+                <td><input class="amount" type="number" min="0" step="0.01" value="80" /></td>
+                <td class="row-controls"><button class="remove-row" title="remove">✕</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:8px">
+            <button id="add-variable" class="btn">+ Add variable expense</button>
+          </div>
+        </div>
+
+        <!-- Savings Goals -->
+        <h3 style="margin-top:12px">Savings goals</h3>
+        <div id="savings-wrapper">
+          <table id="savings-table">
+            <thead>
+              <tr><th>Goal</th><th>Monthly target</th><th></th></tr>
+            </thead>
+            <tbody id="savings-body">
+              <tr>
+                <td><input class="name" type="text" value="Emergency Fund" /></td>
+                <td><input class="amount" type="number" min="0" step="0.01" value="200" /></td>
+                <td class="row-controls"><button class="remove-row" title="remove">✕</button></td>
+              </tr>
+            </tbody>
+          </table>
+          <div style="margin-top:8px" class="inline">
+            <button id="add-saving" class="btn">+ Add savings goal</button>
+            <button id="apply-50-30-20" class="btn ghost" style="border-radius:999px">
+              Apply 50/30/20 recommendation
+            </button>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div style="margin-top:12px" class="actions">
+          <button id="calculate" class="btn">Calculate</button>
+          <button id="export-csv" class="btn ghost">Export CSV</button>
+          <button id="print" class="btn ghost">Print</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Summary + Chart -->
+    <aside>
+      <div class="card summary">
+        <div class="kpi">
+          <div>
+            <div class="label">Total income</div>
+            <div id="total-income" class="val">£0</div>
+          </div>
+          <div class="small-muted">monthly</div>
+        </div>
+
+        <div class="kpi">
+          <div>
+            <div class="label">Total expenses</div>
+            <div id="total-expenses" class="val">£0</div>
+          </div>
+          <div class="small-muted">recurring + variable</div>
+        </div>
+
+        <div class="kpi">
+          <div>
+            <div class="label">Total savings</div>
+            <div id="total-savings" class="val">£0</div>
+          </div>
+          <div class="small-muted">monthly target</div>
+        </div>
+
+        <div class="kpi">
+          <div>
+            <div class="label">Leftover / Disposable</div>
+            <div id="leftover" class="val">£0</div>
+          </div>
+          <div class="small-muted">income - (expenses + savings)</div>
+        </div>
+
+        <div>
+          <div class="label small" style="margin-bottom:6px">Allocation breakdown</div>
+          <div class="progress"><i id="alloc-bar" style="width:0%"></i></div>
+        </div>
+
+        <div class="canvas-wrap">
+          <canvas id="pie" width="360" height="240" aria-label="Budget breakdown chart"></canvas>
+          <div class="small-muted" style="margin-top:8px">
+            Hover slices to see values. Click Calculate to refresh.
+          </div>
+        </div>
+
+        <div>
+          <div class="label small" style="margin:8px 0 4px">Recommendations</div>
+          <div id="recommendations" class="small-muted">
+            Use the 50/30/20 button to auto-fill suggested amounts (needs Calculate to apply).
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+  <!-- Budget Planner End -->
+   
+<section class="hero-content" style="background-color: #fff; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Take Control of Your Budget</h2>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Easily track all your income, including salaries, side hustles, or partner contributions. Add your recurring bills, variable expenses, and savings goals in one simple tool to see exactly where your money goes each month.
+  </p>
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Visualize your spending with interactive charts, apply the 50/30/20 budgeting rule with a single click, and export or print your budget for quick reference. Plan smarter, save more, and take full control of your finances.
+  </p>
+</section>
+
+
+<section class="related-tool-callout">
+  <h2>Related Tool</h2>
+  <p>If you’re budgeting your finances, you might also find our <a href="https://tasknectar.com/subscription-tracker/">Subscription Tracker</a> useful — monitor all your recurring subscriptions in one place and avoid unexpected charges.</p>
+</section>
+
+
+  <div data-include="/footer.html"></div>
+
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+    <i class="bi bi-arrow-up"></i>
+  </a>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/main.js"></script>
+
+  <!-- Include header/footer -->
+  <script>
+    document.querySelectorAll('[data-include]').forEach(async el => {
+      const file = el.getAttribute('data-include');
+      const res = await fetch(file);
+      const html = await res.text();
+      el.innerHTML = html;
+    });
+  </script>
+
+  <!-- Budget Planner Script -->
+<!-- Include Chart.js once in your page -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const tool = document.querySelector(".budget-tool");
+  if (!tool) return;
+
+  const currencyEl = tool.querySelector("#currency");
+  const incomeEl = tool.querySelector("#income");
+  const addIncomeEl = tool.querySelector("#additionalIncome");
+  const recurringBody = tool.querySelector("#recurring-body");
+  const variableBody = tool.querySelector("#variable-body");
+  const savingsBody = tool.querySelector("#savings-body");
+
+  const totalIncomeEl = tool.querySelector("#total-income");
+  const totalExpensesEl = tool.querySelector("#total-expenses");
+  const totalSavingsEl = tool.querySelector("#total-savings");
+  const leftoverEl = tool.querySelector("#leftover");
+  const allocBar = tool.querySelector("#alloc-bar");
+  const pieCanvas = tool.querySelector("#pie");
+  const recText = tool.querySelector("#recommendations");
+
+  let pieChart; // global chart instance
+
+  // Utility: get currency symbol
+  const cur = () => currencyEl.value;
+
+  // Add row function
+  function addRow(body, name = "", amount = 0) {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><input class="name" type="text" value="${name}" /></td>
+      <td><input class="amount" type="number" min="0" step="0.01" value="${amount}" /></td>
+      <td class="row-controls"><button class="remove-row" title="remove">✕</button></td>
+    `;
+    body.appendChild(tr);
+  }
+
+  // Remove row handler
+  tool.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-row")) {
+      e.target.closest("tr").remove();
+      update();
+    }
+  });
+
+  // Add buttons
+  tool.querySelector("#add-recurring").addEventListener("click", () => addRow(recurringBody));
+  tool.querySelector("#add-variable").addEventListener("click", () => addRow(variableBody));
+  tool.querySelector("#add-saving").addEventListener("click", () => addRow(savingsBody));
+
+  // Calculate totals
+  function sum(body) {
+    return Array.from(body.querySelectorAll(".amount")).reduce(
+      (acc, el) => acc + (parseFloat(el.value) || 0),
+      0
+    );
+  }
+
+  function update() {
+    const mainIncome = parseFloat(incomeEl.value) || 0;
+    const extraIncome = parseFloat(addIncomeEl?.value) || 0;
+    const totalIncome = mainIncome + extraIncome;
+
+    const recurring = sum(recurringBody);
+    const variable = sum(variableBody);
+    const savings = sum(savingsBody);
+
+    const expenses = recurring + variable;
+    const leftover = totalIncome - (expenses + savings);
+
+    totalIncomeEl.textContent = `${cur()}${totalIncome.toFixed(2)}`;
+    totalExpensesEl.textContent = `${cur()}${expenses.toFixed(2)}`;
+    totalSavingsEl.textContent = `${cur()}${savings.toFixed(2)}`;
+    leftoverEl.textContent = `${cur()}${leftover.toFixed(2)}`;
+
+    const alloc = ((expenses + savings) / (totalIncome || 1)) * 100;
+    allocBar.style.width = `${Math.min(alloc, 100)}%`;
+
+    drawChart(totalIncome, recurring, variable, savings);
+
+    recText.textContent =
+      leftover < 0
+        ? "⚠️ You're spending more than your total income. Try adjusting expenses or savings targets."
+        : "✅ Balanced budget — leftover funds can go toward savings or discretionary spending.";
+  }
+
+  // 50/30/20 Rule
+  tool.querySelector("#apply-50-30-20").addEventListener("click", () => {
+    const mainIncome = parseFloat(incomeEl.value) || 0;
+    const extraIncome = parseFloat(addIncomeEl?.value) || 0;
+    const totalIncome = mainIncome + extraIncome;
+
+    const needs = totalIncome * 0.5;
+    const wants = totalIncome * 0.3;
+    const save = totalIncome * 0.2;
+
+    const firstRecurring = recurringBody.querySelector(".amount");
+    const firstVariable = variableBody.querySelector(".amount");
+    const firstSaving = savingsBody.querySelector(".amount");
+
+    if (firstRecurring) firstRecurring.value = needs.toFixed(2);
+    if (firstVariable) firstVariable.value = wants.toFixed(2);
+    if (firstSaving) firstSaving.value = save.toFixed(2);
+
+    update();
+  });
+
+  // CSV Export
+  tool.querySelector("#export-csv").addEventListener("click", () => {
+    const rows = [["Type", "Name", "Amount"]];
+    const addData = (type, body) => {
+      body.querySelectorAll("tr").forEach((tr) => {
+        const name = tr.querySelector(".name").value;
+        const amt = tr.querySelector(".amount").value;
+        rows.push([type, name, amt]);
+      });
+    };
+    addData("Recurring", recurringBody);
+    addData("Variable", variableBody);
+    addData("Saving", savingsBody);
+
+    const csv = rows.map((r) => r.join(",")).join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "budget.csv";
+    a.click();
+  });
+
+  // Print
+  tool.querySelector("#print").addEventListener("click", () => {
+    window.print();
+  });
+
+  // Main Calculate Button
+  tool.querySelector("#calculate").addEventListener("click", update);
+
+  // Draw Pie Chart using Chart.js
+  function drawChart(income, recurring, variable, savings) {
+    if (pieChart) pieChart.destroy();
+
+    pieChart = new Chart(pieCanvas.getContext("2d"), {
+      type: 'pie',
+      data: {
+        labels: ['Recurring', 'Variable', 'Savings'],
+        datasets: [{
+          data: [recurring, variable, savings],
+          backgroundColor: ['#FF6B6B', '#EFB301', '#3CB371']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                const value = context.raw;
+                const total = recurring + variable + savings;
+                const percent = total ? ((value / total) * 100).toFixed(1) : 0;
+                return `${context.label}: ${cur()}${value.toFixed(2)} (${percent}%)`;
+              }
+            }
+          },
+          legend: {
+            position: 'bottom'
+          }
+        }
+      }
+    });
+  }
+
+  // Auto-update on input change
+  tool.addEventListener("input", (e) => {
+    if (
+      e.target.classList.contains("amount") ||
+      e.target === incomeEl ||
+      e.target === addIncomeEl
+    ) {
+      update();
+    }
+  });
+
+  update();
+});
+</script>
+
+
+</body>
+
+</html>
