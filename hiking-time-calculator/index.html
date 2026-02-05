@@ -13,7 +13,7 @@
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7609988011266328"
      crossorigin="anonymous"></script>
   <meta charset="utf-8">
-  <title>Printable Calendar | TaskNectar</title>
+  <title>Hiking Time Calculator | TaskNectar</title>
   <meta name="description" content="Create custom printable calendars for any month and year. Easily download or print professional, clean calendar layouts for personal or work use. No sign-up needed.">
   <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tasknectar.com/printable-calendar/" />
@@ -42,58 +42,242 @@
   <script src="../js/calendar-script.js" defer></script>
 </head>
   <!-- Inline print styles for better @media print handling -->
-  <style>
-    @media print {
-      body * {
-        visibility: hidden;
-      }
+<style>
+/* ===== Hiking Duration Estimator ===== */
 
-      #calendar-preview, #calendar-preview * {
-        visibility: visible;
-      }
+.hike-estimator {
+  max-width: 760px;
+  margin: 3rem auto;
+  padding: 2rem 1.5rem;
+  background: #ffffff;
+}
 
-      #calendar-preview {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-        border: none;
-        box-shadow: none;
-      }
+.hike-estimator h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
 
-      .calendar-header h2 {
-        text-align: center;
-        font-size: 20pt;
-        margin-bottom: 10px;
-      }
+.hike-estimator p.intro {
+  color: #444;
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+}
 
-      .calendar-table th, .calendar-table td {
-        border: 1px solid #000 !important;
-        padding: 10px !important;
-        height: 80px !important;
-        vertical-align: top !important;
-      }
-    }
-  </style>
+.hike-form {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.hike-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+
+.hike-inline {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.hike-inline input,
+.hike-inline select,
+.hike-field select {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.hike-inline select {
+  max-width: 130px;
+}
+
+.hike-result {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #eee;
+}
+
+.hike-result h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.3rem;
+}
+
+.hike-time {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin: 0.4rem 0;
+}
+
+.hike-note {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.hike-footer {
+  margin-top: 2rem;
+  font-size: 0.95rem;
+}
+
+.hike-footer a {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+  .hike-inline {
+    flex-direction: column;
+  }
+}
+</style>
 </head>
 <body>
 <div data-include="/header.html"></div>
 <section class="hero-content">
   <div class="hero-content-content">
-    <h1>Hiking Time Calendar</h1>
-    <p>Coming Soon</p>
+    <h1>Hiking Time Calculator</h1>
+<p>Planning a walk or hike? Use this calculator to get a realistic time estimate based on distance, elevation gain and how you like to walk.</p>
   </div>
 </section>
+
+<!-- Calculator Starts Here -->
+
+<section class="hike-estimator">
+
+  <h2>Hiking Duration Estimator</h2>
+  <p class="intro">
+    Enter the basics of your walk and get a realistic estimate of how long it’s likely to take.
+    This tool provides a guide — not a race plan.
+  </p>
+
+  <div class="hike-form">
+
+    <div class="hike-field">
+      <label for="distance">Distance</label>
+      <div class="hike-inline">
+        <input type="number" id="distance" placeholder="e.g. 8.9" min="0" step="0.1">
+        <select id="distanceUnit">
+          <option value="km">km</option>
+          <option value="miles">miles</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="hike-field">
+      <label for="ascent">Total Ascent</label>
+      <div class="hike-inline">
+        <input type="number" id="ascent" placeholder="e.g. 223" min="0" step="1">
+        <select id="ascentUnit">
+          <option value="meters">metres</option>
+          <option value="feet">feet</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="hike-field">
+      <label for="style">Walking style</label>
+      <select id="style">
+        <option value="1.15">Leisurely – frequent stops</option>
+        <option value="1" selected>Steady – typical hiking pace</option>
+        <option value="0.85">Fast – purposeful walking</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div class="hike-result" id="result">
+    <h3>Estimated walking time</h3>
+    <div class="hike-time">—</div>
+    <p class="hike-note">
+      Enter your route details above to see an estimate.
+    </p>
+  </div>
+
+  <div class="hike-footer">
+    <p>
+      Want to compare this estimate with real-world walks?
+      Explore detailed routes on
+      <a href="https://northernrambler.co.uk" target="_blank" rel="noopener noreferrer">
+        Northern Rambler
+      </a>.
+    </p>
+  </div>
+
+</section>
+
+<script>
+/* ===== Hiking Duration Estimator Logic ===== */
+
+const distanceInput = document.getElementById("distance");
+const ascentInput = document.getElementById("ascent");
+const distanceUnit = document.getElementById("distanceUnit");
+const ascentUnit = document.getElementById("ascentUnit");
+const styleSelect = document.getElementById("style");
+const resultBox = document.getElementById("result").querySelector(".hike-time");
+
+function calculateEstimate() {
+  let distance = parseFloat(distanceInput.value);
+  let ascent = parseFloat(ascentInput.value);
+
+  // Only calculate if both distance and ascent are valid numbers
+  if (isNaN(distance) || distance <= 0 || isNaN(ascent) || ascent < 0) {
+    resultBox.textContent = "—";
+    return;
+  }
+
+  // Convert to miles & feet for internal calculations
+  let miles = distanceUnit.value === "km" ? distance * 0.621371 : distance;
+  let feet = ascentUnit.value === "meters" ? ascent * 3.28084 : ascent;
+
+  // Rule-of-thumb walking estimate
+  let hoursBase = (miles / 3) + (feet / 2000);
+  let styleFactor = parseFloat(styleSelect.value);
+  let adjustedHours = hoursBase * styleFactor;
+
+  // Realistic range
+  let minMinutes = Math.round(adjustedHours * 55);
+  let maxMinutes = Math.round(adjustedHours * 65);
+
+  function formatTime(mins) {
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    return `${h}h ${m}m`;
+  }
+
+  resultBox.textContent = `${formatTime(minMinutes)} – ${formatTime(maxMinutes)}`;
+}
+
+// Recalculate on input changes
+[distanceInput, ascentInput, distanceUnit, ascentUnit, styleSelect]
+  .forEach(el => el.addEventListener("input", calculateEstimate));
+
+</script>
+
+<!-- Calculator Ends Here -->
+
 </br>
 
-  <section class="hero-content" style="background-color: #f4f6fb; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
-  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">COMING SOON</h2>
-  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">  </p>
-  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">  </p>
-  <br />
+<section class="hero-content" style="background-color: #f4f6fb; max-width: 1320px; margin: 2rem auto; padding: 0 1rem;">
+  <h2 style="font-size: 1.5rem; font-weight: bold; color: #000!important;">Hiking Duration Estimator</h2>
+  
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Planning a hike has never been easier with our Hiking Duration Estimator. This free hiking time calculator allows you to quickly estimate how long a walk or trek will take based on the distance, total ascent, and your preferred walking style. Whether you’re preparing for a leisurely countryside stroll, a challenging mountain hike, or a weekend trail adventure, this tool helps you plan your journey accurately and safely.
+  </p>
+  
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Simply enter the total distance of your hike and the cumulative climb to get an estimated walking time. You can choose between kilometres or miles for distance and metres or feet for ascent, making the calculator flexible for any route. Adjust the walking style to match your pace — from relaxed and casual to steady or fast hiking. The estimator then uses a rule-of-thumb method to provide a realistic time range, giving you both minimum and maximum expected durations for your hike.
+  </p>
+  
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    This hiking time calculator is ideal for anyone wanting to plan walks efficiently, estimate arrival times, or compare different routes. By factoring in both distance and total climb, it gives a more accurate duration than simple distance-based estimates. Whether you are a beginner hiker, a weekend explorer, or an experienced trekker, this walking duration estimator can help you make better decisions and enjoy your outdoor adventures with confidence.
+  </p>
+  
+  <p style="margin-top: 1rem; font-size: 1.1rem; color: #000!important;">
+    Start planning your next hike today by entering your route details above. With our Hiking Duration Estimator, you’ll get a clear, easy-to-read estimate that helps you prepare for any journey — from local trails to mountain summits.
+  </p>
 </section>
+
   <!-- HEADER AND FOOTER SCRIPT START-->
   <script>
   window.addEventListener("DOMContentLoaded", () => {
